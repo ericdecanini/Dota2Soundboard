@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">Dota 2 Soundboard</string>
+    <string name="about">About</string>
+    <string name="version">Version 0.0.1</string>
+    <string name="facebook_app_id">395721314191782</string>
+    <string name="admob_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="blank"> </string>
+
+    <!-- Menu Actions -->
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <!-- Navigation -->
+    <string name="nav_header">&#160;&#160;Dota 2 Soundboard</string>
+    <string name="nav_heroes">Heroes</string>
+    <string name="nav_misc">Misc</string>
+    <string name="nav_settings">About Dota 2 Soundboard</string>
+    <string name="nav_share_facebook">Share us on Facebook</string>
+    <string name="nav_share_twitter">Tweet about us</string>
+    <string name="nav_review">Give us a Review</string>
+
+    <!-- Main Activity Strings -->
+    <string name="favourites">Favourites</string>
+    <string name="recents">Recents</string>
+    <string name="discover">Discover</string>
+
+    <!-- Heroes Activity Strings -->
+    <string name="strength">Strength</string>
+    <string name="agility">Agility</string>
+    <string name="intelligence">Intelligence</string>
+
+    <!-- Soundboard Activity Strings -->
+    <string name="added_to_favourites">Added to favourites</string>
+    <string name="removed_from_favourites">Removed from favourites</string>
+    <string name="favourite">Favourite</string>
+    <string name="free_sounds">Free</string>
+    <string name="premium_sounds">Premium</string>
+    <string name="KEY_HERO" translatable="false">KEY_HERO</string>
+    <string name="FLAG_HAS_MORPH" translatable="false">FLAG_HAS_MORPH</string>
+    <string name="TRANSITION_IMAGE" translatable="false">TRANSITION_IMAGE</string>
+
+    <!-- About Activity Strings -->
+    <string name="about_title">Dota 2 Soundboard</string>
+    <string name="about_contact">Contact Us</string>
+    <string name="about_email">Email:&#160;</string>
+    <string name="email">eddecanini@gmail.com</string>
+    <string name="about_lead_developer">Lead Developer:</string>
+    <string name="about_eric">Eric Decanini</string>
+    <string name="about_assistant_developer">Assistant Developer</string>
+    <string name="about_michael">Michael Sumner</string>
+    <string name="about_graphics">Graphics and Design</string>
+    <string name="about_disclaimer_header">Disclaimer:</string>
+    <string name="disclaimer">Dota 2 Soundboard (“The App”) is created by Panda Development Studios (“The Developer”) for the
+        purpose inclusive of entertainment. The App does not hold rights nor claims and copyrights to its designs and resources.
+        These designs and resources are rightfully owned, claimed, and copyrighted by their owners.</string>
+
+    <string name="intent_share">Check out Dota 2 Soundboard!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

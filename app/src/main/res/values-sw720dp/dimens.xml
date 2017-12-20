@@ -1,0 +1,17 @@
+<resources>
+    <dimen name="discover_size">440dp</dimen>
+    <dimen name="extra_padding_bottom">112dp</dimen>
+    <dimen name="extended_appbar_height">372dp</dimen>
+
+    <dimen name="nav_header_size">26sp</dimen>
+    <dimen name="home_full_size">116dp</dimen>
+    <dimen name="home_image_size">92dp</dimen>
+    <dimen name="home_text_margin">6dp</dimen>
+    <dimen name="home_item_padding">8dp</dimen>
+
+    <dimen name="grid_item_hero_width">60dp</dimen>
+    <dimen name="grid_item_hero_height">90dp</dimen>
+    <dimen name="grid_item_misc_height">128dp</dimen>
+    <dimen name="button_category_size">40dp</dimen>
+
+</resources>

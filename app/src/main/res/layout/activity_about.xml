@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="pandastudios.dotasound.AboutActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/header_bg">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/app_name"
+                android:textSize="18sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/about_appicon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/art_appicon" />
+
+                <TextView
+                    android:id="@+id/about_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/about_appicon"
+                    android:layout_toRightOf="@id/about_appicon"
+                    android:text="@string/about_title"
+                    android:textColor="@color/textColor"
+                    android:textSize="24sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/version"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/dividerColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/about_contact"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/about_email"
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="email"
+                    android:linksClickable="true"
+                    android:text="@string/email"
+                    android:textColorLink="@color/hyperlink"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/dividerColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/about_lead_developer"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/about_eric"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/textColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/about_assistant_developer"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/about_michael"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/textColor" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/about_graphics"
+                android:textColor="@color/textColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/about_michael"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/textColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/about_disclaimer_header"
+                android:alpha="0.5"
+                android:textSize="12sp"
+                android:textColor="@color/textColor" />
+            <TextView
+                android:id="@+id/disclaimer"
+                android:layout_width="wrap_content"
+                android:alpha="0.5"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:linksClickable="true"
+                android:text="@string/disclaimer"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColorLink="@color/hyperlink" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Heroes -->
+    <string name="Abaddon">Abaddon</string>
+    <string name="Alchemist">Alchemist</string>
+    <string name="Axe">Axe</string>
+    <string name="Beastmaster">Beastmaster</string>
+    <string name="Brewmaster">Brewmaster</string>
+    <string name="Bristleback">Bristleback</string>
+    <string name="Centaur">Centaur Warrunner</string>
+    <string name="Chaosknight">Chaos Knight</string>
+    <string name="Clockwerk">Clockwerk</string>
+    <string name="Doom">Doom</string>
+    <string name="Dragonknight">Dragon Knight</string>
+    <string name="Earthspirit">Earth Spirit</string>
+    <string name="Earthshaker">Earthshaker</string>
+    <string name="Eldertitan">Elder Titan</string>
+    <string name="Huskar">Huskar</string>
+    <string name="Io">Io</string>
+    <string name="Kunkka">Kunkka</string>
+    <string name="Legioncommander">Legion Commander</string>
+    <string name="Lifestealer">Lifestealer</string>
+    <string name="Lycan">Lycan</string>
+    <string name="Magnus">Magnus</string>
+    <string name="Nightstalker">Night Stalker</string>
+    <string name="Omniknight">Omniknight</string>
+    <string name="Phoenix">Phoenix</string>
+    <string name="Pudge">Pudge</string>
+    <string name="Sandking">Sand King</string>
+    <string name="Slardar">Slardar</string>
+    <string name="Spiritbreaker">Spirit Breaker</string>
+    <string name="Sven">Sven</string>
+    <string name="Tidehunter">Tidehunter</string>
+    <string name="Timbersaw">Timbersaw</string>
+    <string name="Tiny">Tiny</string>
+    <string name="Treantprotector">Treant Protector</string>
+    <string name="Tusk">Tusk</string>
+    <string name="Underlord">Underlord</string>
+    <string name="Undying">Undying</string>
+    <string name="Wraithking">Wraith King</string>
+
+    <string name="Antimage">Anti-mage</string>
+    <string name="Arcwarden">Arc Warden</string>
+    <string name="Bloodseeker">Bloodseeker</string>
+    <string name="Bountyhunter">Bounty Hunter</string>
+    <string name="Broodmother">Broodmother</string>
+    <string name="Clinkz">Clinkz</string>
+    <string name="Drowranger">Drow Ranger</string>
+    <string name="Emberspirit">Ember Spirit</string>
+    <string name="Facelessvoid">Faceless Void</string>
+    <string name="Gyrocopter">Gyrocopter</string>
+    <string name="Juggernaut">Juggernaut</string>
+    <string name="Lonedruid">Lone Druid</string>
+    <string name="Luna">Luna</string>
+    <string name="Medusa">Medusa</string>
+    <string name="Meepo">Meepo</string>
+    <string name="Mirana">Mirana</string>
+    <string name="Monkeyking">Monkey King</string>
+    <string name="Morphling">Morphling</string>
+    <string name="Nagasiren">Naga Siren</string>
+    <string name="Nyx">Nyx Assassin</string>
+    <string name="Pangolier">Pangolier</string>
+    <string name="Phantomassassin">Phantom Assassin</string>
+    <string name="Phantomlancer">Phantom Lancer</string>
+    <string name="Razor">Razor</string>
+    <string name="Riki">Riki</string>
+    <string name="Shadowfiend">Shadow Fiend</string>
+    <string name="Slark">Slark</string>
+    <string name="Sniper">Sniper</string>
+    <string name="Spectre">Spectre</string>
+    <string name="Templarassassin">Templar Assassin</string>
+    <string name="Terrorblade">Terrorblade</string>
+    <string name="Trollwarlord">Troll Warlord</string>
+    <string name="Ursa">Ursa</string>
+    <string name="Vengefulspirit">Vengeful Spirit</string>
+    <string name="Venomancer">Venomancer</string>
+    <string name="Viper">Viper</string>
+    <string name="Weaver">Weaver</string>
+
+    <string name="Ancientapparition">Ancient Apparition</string>
+    <string name="Bane">Bane</string>
+    <string name="Batrider">Batrider</string>
+    <string name="Chen">Chen</string>
+    <string name="Crystalmaiden">Crystal Maiden</string>
+    <string name="Darkseer">Dark Seer</string>
+    <string name="Darkwillow">Dark Willow</string>
+    <string name="Dazzle">Dazzle</string>
+    <string name="Deathprophet">Death Prophet</string>
+    <string name="Disruptor">Disruptor</string>
+    <string name="Enchantress">Enchantress</string>
+    <string name="Enigma">Enigma</string>
+    <string name="Invoker">Invoker</string>
+    <string name="Jakiro">Jakiro</string>
+    <string name="Keeperofthelight">Keeper of the Light</string>
+    <string name="Leshrac">Leshrac</string>
+    <string name="Lich">Lich</string>
+    <string name="Lina">Lina</string>
+    <string name="Lion">Lion</string>
+    <string name="Naturesprophet">Nature\'s Prophet</string>
+    <string name="Necrophos">Necrophos</string>
+    <string name="Ogremagi">Ogre Magi</string>
+    <string name="Oracle">Oracle</string>
+    <string name="Outworlddevourer">Outworld Devourer</string>
+    <string name="Puck">Puck</string>
+    <string name="Pugna">Pugna</string>
+    <string name="Queenofpain">Queen of Pain</string>
+    <string name="Rubick">Rubick</string>
+    <string name="Shadowdemon">Shadow Demon</string>
+    <string name="Shadowshaman">Shadow Shaman</string>
+    <string name="Silencer">Silencer</string>
+    <string name="Skywrathmage">Skywrath Mage</string>
+    <string name="Stormspirit">Storm Spirit</string>
+    <string name="Techies">Techies</string>
+    <string name="Tinker">Tinker</string>
+    <string name="Visage">Visage</string>
+    <string name="Warlock">Warlock</string>
+    <string name="Windranger">Windranger</string>
+    <string name="Winterwyvern">Winter Wyvern</string>
+    <string name="Witchdoctor">Witch Doctor</string>
+    <string name="Zeus">Zeus</string>
+
+    <string-array name="strength_heroes">
+        <item>@string/Abaddon</item>
+        <item>@string/Alchemist</item>
+        <item>@string/Axe</item>
+        <item>@string/Beastmaster</item>
+        <item>@string/Brewmaster</item>
+        <item>@string/Bristleback</item>
+        <item>@string/Centaur</item>
+        <item>@string/Chaosknight</item>
+        <item>@string/Clockwerk</item>
+        <item>@string/Doom</item>
+        <item>@string/Dragonknight</item>
+        <item>@string/Earthspirit</item>
+        <item>@string/Earthshaker</item>
+        <item>@string/Eldertitan</item>
+        <item>@string/Huskar</item>
+        <item>@string/Io</item>
+        <item>@string/Kunkka</item>
+        <item>@string/Legioncommander</item>
+        <item>@string/Lifestealer</item>
+        <item>@string/Lycan</item>
+        <item>@string/Magnus</item>
+        <item>@string/Nightstalker</item>
+        <item>@string/Omniknight</item>
+        <item>@string/Phoenix</item>
+        <item>@string/Pudge</item>
+        <item>@string/Sandking</item>
+        <item>@string/Slardar</item>
+        <item>@string/Spiritbreaker</item>
+        <item>@string/Sven</item>
+        <item>@string/Tidehunter</item>
+        <item>@string/Timbersaw</item>
+        <item>@string/Tiny</item>
+        <item>@string/Treantprotector</item>
+        <item>@string/Tusk</item>
+        <item>@string/Underlord</item>
+        <item>@string/Undying</item>
+        <item>@string/Wraithking</item>
+    </string-array>
+
+    <string-array name="agility_heroes">
+        <item>@string/Antimage</item>
+        <item>@string/Arcwarden</item>
+        <item>@string/Bloodseeker</item>
+        <item>@string/Bountyhunter</item>
+        <item>@string/Broodmother</item>
+        <item>@string/Clinkz</item>
+        <item>@string/Drowranger</item>
+        <item>@string/Emberspirit</item>
+        <item>@string/Facelessvoid</item>
+        <item>@string/Gyrocopter</item>
+        <item>@string/Juggernaut</item>
+        <item>@string/Lonedruid</item>
+        <item>@string/Luna</item>
+        <item>@string/Medusa</item>
+        <item>@string/Meepo</item>
+        <item>@string/Mirana</item>
+        <item>@string/Monkeyking</item>
+        <item>@string/Morphling</item>
+        <item>@string/Nagasiren</item>
+        <item>@string/Nyx</item>
+        <item>@string/Pangolier</item>
+        <item>@string/Phantomassassin</item>
+        <item>@string/Phantomlancer</item>
+        <item>@string/Razor</item>
+        <item>@string/Riki</item>
+        <item>@string/Shadowfiend</item>
+        <item>@string/Slark</item>
+        <item>@string/Sniper</item>
+        <item>@string/Spectre</item>
+        <item>@string/Templarassassin</item>
+        <item>@string/Terrorblade</item>
+        <item>@string/Trollwarlord</item>
+        <item>@string/Ursa</item>
+        <item>@string/Vengefulspirit</item>
+        <item>@string/Venomancer</item>
+        <item>@string/Viper</item>
+        <item>@string/Weaver</item>
+    </string-array>
+
+    <string-array name="intelligence_heroes">
+        <item>@string/Ancientapparition</item>
+        <item>@string/Bane</item>
+        <item>@string/Batrider</item>
+        <item>@string/Chen</item>
+        <item>@string/Crystalmaiden</item>
+        <item>@string/Darkseer</item>
+        <item>@string/Darkwillow</item>
+        <item>@string/Dazzle</item>
+        <item>@string/Deathprophet</item>
+        <item>@string/Disruptor</item>
+        <item>@string/Enchantress</item>
+        <item>@string/Enigma</item>
+        <item>@string/Invoker</item>
+        <item>@string/Jakiro</item>
+        <item>@string/Keeperofthelight</item>
+        <item>@string/Leshrac</item>
+        <item>@string/Lich</item>
+        <item>@string/Lina</item>
+        <item>@string/Lion</item>
+        <item>@string/Naturesprophet</item>
+        <item>@string/Necrophos</item>
+        <item>@string/Ogremagi</item>
+        <item>@string/Oracle</item>
+        <item>@string/Outworlddevourer</item>
+        <item>@string/Puck</item>
+        <item>@string/Pugna</item>
+        <item>@string/Queenofpain</item>
+        <item>@string/Rubick</item>
+        <item>@string/Shadowdemon</item>
+        <item>@string/Shadowshaman</item>
+        <item>@string/Silencer</item>
+        <item>@string/Skywrathmage</item>
+        <item>@string/Stormspirit</item>
+        <item>@string/Techies</item>
+        <item>@string/Tinker</item>
+        <item>@string/Visage</item>
+        <item>@string/Warlock</item>
+        <item>@string/Windranger</item>
+        <item>@string/Winterwyvern</item>
+        <item>@string/Witchdoctor</item>
+        <item>@string/Zeus</item>
+    </string-array>
+
+    <!-- Misc Items -->
+    <string-array name="misc_items">
+        <item>@string/ti7</item>
+    </string-array>
+
+    <!-- Abaddon -->
+    <string name="abaddon_death_for_you">Death for you, life for me</string>
+    <string name="abaddon_hahaha">Ha ha ha</string>
+    <string name="abaddon_hmhmhm1">Hm hm hm (1)</string>
+    <string name="abaddon_hmhmhm2">Hm hm hm (2)</string>
+    <string name="abaddon_its_not_time_yet">It\'s not time yet</string>
+    <string name="abaddon_my_life_is_mine_to_spend">My life is mine to spend</string>
+    <string name="abaddon_ah_scepter">Ah, scepter</string>
+    <string name="abaddon_sh_wizard">Shi**y wizard</string>
+    <string name="abaddon_such_power">Such power</string>
+    <string name="abaddon_victory">Victory</string>
+
+    <!-- Alchemist -->
+    <string name="alchemist_alchemy_future">Alchemy is the future</string>
+    <string name="alchemist_duck">Duck!</string>
+    <string name="alchemist_greed_is_good">Greed is good</string>
+    <string name="alchemist_happiness_can_be_bought">Happiness can be bought</string>
+    <string name="alchemist_i_think_ok">I think I\'ll be ok</string>
+    <string name="alchemist_im_feeling_punchy">I\'m feeling punchy</string>
+    <string name="alchemist_im_not_ready">I\'m not ready</string>
+    <string name="alchemist_okey_dokey">Okey dokey</string>
+    <string name="alchemist_sh_wizard">Shi**y wizard</string>
+    <string name="alchemist_throw_the_thing">Throw the damn thing</string>
+
+    <!-- TI7 Sounds -->
+    <string name="ti7">The Internationals 2017</string>
+    <string name="ti7_applause">Applause</string>
+    <string name="ti7_ay_ay_ay">Ай-ай-ай-ай-ай, что сейчас произошло!</string>
+    <string name="ti7_ba_dum_tishh">Ba-dum tishh</string>
+    <string name="ti7_bozhe_ti_posmotri">Боже, ты посмотри вокруг, что происходит!</string>
+    <string name="ti7_brutal_savage_rekt">Brutal. Savage. Rekt.</string>
+    <string name="ti7_charge">Charge</string>
+    <string name="ti7_crash_and_burn">Crash and burn</string>
+    <string name="ti7_crickets">Crickets</string>
+    <string name="ti7_crybaby">Crybaby</string>
+    <string name="ti7_drum_roll">Drum roll</string>
+    <string name="ti7_ehto_gg">Это ГГ</string>
+    <string name="ti7_eto_prosto_netchto">Это. Просто. Нечто.</string>
+    <string name="ti7_frog">Frog</string>
+    <string name="ti7_headshake">Headshake</string>
+    <string name="ti7_its_a_disastah">It\'s a disastah!</string>
+    <string name="ti7_jia_you">加油！</string>
+    <string name="ti7_patience_from_zhou">Patience from Zhou</string>
+    <string name="ti7_po_liang_lu">破两路更好打，是吧？</string>
+    <string name="ti7_sad_trombone">Sad trombone</string>
+    <string name="ti7_sproing">Sproing</string>
+    <string name="ti7_theyre_all_dead">They\'re all dead!</string>
+    <string name="ti7_tian_huo">天火！</string>
+    <string name="ti7_wan_bu_liao_la">玩不了啦！</string>
+    <string name="ti7_waow">Waow</string>
+    <string name="ti7_zhil_do_konsta">Жил до конца, умер как герой</string>
+    <string name="ti7_zou_hao_bu_song">走好，不送</string>
+
+</resources>

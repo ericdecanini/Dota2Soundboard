@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_heroes"
+        android:title="@string/nav_heroes" />
+
+    <item
+        android:id="@+id/nav_misc"
+        android:title="@string/nav_misc" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/nav_settings" />
+
+    <item
+        android:title=""
+        android:id="@+id/group2">
+
+        <menu>
+
+            <item
+                android:id="@+id/nav_share_facebook"
+                android:icon="@drawable/ic_facebook"
+                android:title="@string/nav_share_facebook" />
+
+            <item
+                android:id="@+id/nav_share_twitter"
+                android:icon="@drawable/ic_twitter"
+                android:title="@string/nav_share_twitter" />
+
+            <item
+                android:id="@+id/nav_review"
+                android:icon="@drawable/ic_star_black_24dp"
+                android:title="@string/nav_review" />
+
+        </menu>
+
+    </item>
+
+</menu>

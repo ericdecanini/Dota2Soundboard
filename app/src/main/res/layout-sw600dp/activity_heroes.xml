@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="pandastudios.dotasound.AboutActivity"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/header_bg">
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/nav_heroes"
+                    android:textSize="18sp" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/strength_group"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
+
+                <pandastudios.dotasound.VerticalTextView
+                    style="@style/HeaderText"
+                    android:layout_width="wrap_content"
+                    android:text="@string/strength"
+                    android:gravity="bottom"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:alpha="0.5"
+                    android:background="@color/textColor" />
+
+                <GridView
+                    android:id="@+id/sample_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnWidth="60dp"
+                    android:numColumns="auto_fit" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/strength_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:columnWidth="60dp"
+                    android:numColumns="auto_fit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
+
+                <pandastudios.dotasound.VerticalTextView
+                    style="@style/HeaderText"
+                    android:layout_width="wrap_content"
+                    android:text="@string/agility"
+                    android:gravity="bottom"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:alpha="0.5"
+                    android:background="@color/textColor" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/agility_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:columnWidth="60dp"
+                    android:numColumns="auto_fit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
+
+                <pandastudios.dotasound.VerticalTextView
+                    style="@style/HeaderText"
+                    android:id="@+id/header_text"
+                    android:layout_width="wrap_content"
+                    android:text="@string/intelligence"
+                    android:gravity="bottom"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp"
+                    android:alpha="0.5"
+                    android:background="@color/textColor" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/intelligence_grid"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:columnWidth="60dp"
+                    android:layout_height="wrap_content"
+                    android:numColumns="auto_fit" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/admob_id" />
+
+    </android.support.design.widget.CoordinatorLayout>

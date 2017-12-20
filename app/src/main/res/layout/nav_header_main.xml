@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="28dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginEnd="16dp"
+    android:orientation="vertical">
+
+    <com.github.chuross.widget.ExtraTextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nav_header"
+        android:textColor="@color/title_main"
+        android:textSize="@dimen/nav_header_size"
+        android:fontFamily="@font/radiance"
+        app:ext_txt_drawable="@drawable/art_appicon"
+        app:ext_txt_drawableWidth="24dp"
+        app:ext_txt_drawableHeight="24dp"
+        app:ext_txt_drawablePosition="left" />
+
+</LinearLayout>

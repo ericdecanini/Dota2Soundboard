@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="pandastudios.dotasound.AboutActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/header_bg">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/nav_misc"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/header_text"
+                style="@style/HeaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="16dp"
+                android:text="@string/favourites" />
+            
+            <link.fls.BoundLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                app:maxWidth="400dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:alpha="0.5"
+                    android:background="@color/textColor" />
+            </link.fls.BoundLayout>
+
+
+
+            <GridView
+                android:id="@+id/favourites_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:columnWidth="@dimen/home_full_size"
+                android:numColumns="auto_fit" />
+
+        </LinearLayout>
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/admob_id" />
+
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>

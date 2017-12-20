@@ -1,0 +1,20 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="discover_size">256dp</dimen>
+    <dimen name="extended_appbar_height">214dp</dimen>
+    <dimen name="grid_spacing">8dp</dimen>
+    <dimen name="horizontal_padding">16dp</dimen>
+    <dimen name="vertical_padding">16dp</dimen>
+
+    <dimen name="nav_header_size">20sp</dimen>
+    <dimen name="home_full_size">80dp</dimen>
+    <dimen name="home_image_size">72dp</dimen>
+    <dimen name="home_text_margin">2dp</dimen>
+    <dimen name="home_item_padding">0dp</dimen>
+
+    <dimen name="grid_item_hero_width">50dp</dimen>
+    <dimen name="grid_item_hero_height">78dp</dimen>
+    <dimen name="grid_item_misc_height">92dp</dimen>
+    <dimen name="button_category_size">24dp</dimen>
+
+</resources>

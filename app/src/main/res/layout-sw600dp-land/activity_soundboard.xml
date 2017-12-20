@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/header_bg">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/app_name"
+                android:textSize="18sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="3"
+            android:background="@drawable/bg_02">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/coordinator_layout"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.AppBarLayout
+                        android:id="@+id/app_bar_layout"
+                        android:elevation="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="216dp"
+                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/header_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/header_dk" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="164dp"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/scrim_bottom"/>
+                            <TextView
+                                android:id="@+id/soundboard_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/SoundboardTitle"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginStart="40dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_gravity="bottom"/>
+                        </FrameLayout>
+
+                    </android.support.design.widget.AppBarLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/header_bg"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="32dp"
+                        android:paddingTop="24dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                        <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+                            android:id="@+id/sound_categories"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="64dp"
+                            app:tbgCheckedButton="@id/category_attack">
+
+                            <pandastudios.dotasound.CategoryButton
+                                android:id="@+id/category_attack"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp" />
+
+                            <pandastudios.dotasound.CategoryButton
+                                android:id="@+id/category_abilities"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp" />
+
+                        </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+                            <ImageView
+                                android:id="@+id/morph_button"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_unmorphed_silver"/>
+
+                        </LinearLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/sounds_grid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/admob_id" />
+
+        </android.support.v7.widget.CardView>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</LinearLayout>

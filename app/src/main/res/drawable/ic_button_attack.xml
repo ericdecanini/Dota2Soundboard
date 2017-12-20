@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <bitmap android:src="@drawable/ic_star_border_white_24dp" />
+                <bitmap android:src="@drawable/bg_02"/>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

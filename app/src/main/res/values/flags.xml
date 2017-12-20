@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="is_phone">true</bool>
+    <bool name="is_landscape">false</bool>
+    <bool name="is_ten">false</bool>
+
+</resources>

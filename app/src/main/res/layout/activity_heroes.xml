@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pandastudios.dotasound.AboutActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/header_bg">
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/nav_heroes"
+                    android:textSize="18sp" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_id" />
+
+</FrameLayout>

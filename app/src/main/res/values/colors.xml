@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2f363d</color>
+    <color name="colorPrimaryDark">#1b1e21</color>
+    <color name="colorAccent">#b44335</color>
+    <color name="colorHighlight">#daa520</color>
+    <color name="textColor">#BDBDBD</color>
+    <color name="dividerColor">#20000000</color>
+    <color name="hyperlink">#daa520</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="title_main">#e2d9c3</color>
+    <color name="hero_name_colour">#88000000</color>
+    <color name="skeleton_colour">#F5F5F5</color>
+
+</resources>

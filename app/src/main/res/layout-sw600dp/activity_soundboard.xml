@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="pandastudios.dotasound.AboutActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/extended_appbar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:contentScrim="@drawable/header_bg"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="none">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="164dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/scrim_bottom_large" />
+
+                <ImageView
+                    android:id="@+id/header_image"
+                    android:layout_width="600dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/header_dk" />
+            </FrameLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/extended_appbar_height"
+                app:layout_collapseMode="none"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:paddingTop="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+                android:id="@+id/sound_categories"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="64dp"
+                app:tbgCheckedButton="@id/category_attack">
+
+                <pandastudios.dotasound.CategoryButton
+                    android:id="@+id/category_attack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+                <pandastudios.dotasound.CategoryButton
+                    android:id="@+id/category_abilities"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="8dp" />
+
+            </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+            <ImageView
+                android:id="@+id/morph_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_unmorphed_silver"/>
+
+        </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/sounds_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/admob_id" />
+
+</android.support.design.widget.CoordinatorLayout>

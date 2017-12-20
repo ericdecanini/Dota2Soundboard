@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/extra_padding_bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/favourites_title"
+                style="@style/HomeHeaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/vertical_padding"
+                android:paddingLeft="@dimen/horizontal_padding"
+                android:paddingRight="@dimen/horizontal_padding"
+                android:text="@string/favourites" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/favourites_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/horizontal_padding"
+                android:paddingRight="@dimen/horizontal_padding" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/vertical_padding"
+                android:layout_weight="3">
+
+                <ImageView
+                    android:id="@+id/discover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/discover_size"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/header_abaddon" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="132dp"
+                    android:background="@drawable/scrim_top" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="164dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/scrim_bottom_large" />
+
+                <TextView
+                    style="@style/HomeHeaderText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingLeft="@dimen/horizontal_padding"
+                    android:paddingStart="@dimen/horizontal_padding"
+                    android:text="@string/discover" />
+
+                <TextView
+                    android:id="@+id/discover_title"
+                    style="@style/SoundboardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="8dp"
+                    android:paddingLeft="@dimen/horizontal_padding"
+                    android:paddingStart="@dimen/horizontal_padding" />
+
+            </FrameLayout>
+
+            <TextView
+                style="@style/HomeHeaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_padding"
+                android:paddingLeft="@dimen/horizontal_padding"
+                android:paddingRight="@dimen/horizontal_padding"
+                android:text="@string/recents" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recents_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/horizontal_padding"
+                android:paddingRight="@dimen/horizontal_padding" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/admob_id" />
+
+</FrameLayout>
