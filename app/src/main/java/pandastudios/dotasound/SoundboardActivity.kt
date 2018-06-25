@@ -32,6 +32,10 @@ class SoundboardActivity : AppCompatActivity() {
 
     private var id_attack: Int = -1
     private var id_ability: Int = -1
+    private var id_items: Int = -1
+    private var id_game: Int = -1
+    private var id_encounters: Int = -1
+    private var id_misc: Int = -1
 
     private val currentSoundsList = ArrayList<Sound>()
     private val currentSoundsListUnmorphed = ArrayList<Sound>()
@@ -42,6 +46,14 @@ class SoundboardActivity : AppCompatActivity() {
     private val soundsListAttackMorphed = ArrayList<Sound>()
     private val soundsListAbilities = ArrayList<Sound>()
     private val soundsListAbilitiesMorphed = ArrayList<Sound>()
+    private val soundsListItems = ArrayList<Sound>()
+    private val soundsListItemsMorphed = ArrayList<Sound>()
+    private val soundsListGame = ArrayList<Sound>()
+    private val soundsListGameMorphed = ArrayList<Sound>()
+    private val soundsListHeroRelated = ArrayList<Sound>()
+    private val soundsListHeroRelatedMorphed = ArrayList<Sound>()
+    private val soundsListMisc = ArrayList<Sound>()
+    private val soundsListMiscMorphed = ArrayList<Sound>()
 
     private var heroKey = ""
     private var imageRes = R.drawable.board_header_ti7
@@ -71,14 +83,29 @@ class SoundboardActivity : AppCompatActivity() {
         // Get the ids of each button
         id_attack = category_attack.id
         id_ability = category_abilities.id
+        id_items = category_items.id
+        id_game = category_game.id
+        id_encounters = category_encounters.id
+        id_misc = category_misc.id
 
         // Set category icons
         category_attack.setImageResource(R.drawable.ic_sword)
         category_abilities.setImageResource(R.drawable.ic_add_white_24dp)
+        category_items.setImageResource(R.drawable.ic_fitness_center_white_24dp)
+        category_game.setImageResource(R.drawable.ic_games_white_24dp)
+        category_encounters.setImageResource(R.drawable.ic_person_white_24dp)
+        category_misc.setImageResource(R.drawable.ic_music_note_white_24dp)
 
         // Hide empty categories
-        if (soundsListAttack.size == 0) category_attack.visibility = View.GONE
+        if (soundsListAttack.size == 0) {
+            category_attack.visibility = View.GONE
+            category_misc.performClick()
+        }
         if (soundsListAbilities.size == 0) category_abilities.visibility = View.GONE
+        if (soundsListItems.size == 0) category_items.visibility = View.GONE
+        if (soundsListGame.size == 0) category_game.visibility = View.GONE
+        if (soundsListHeroRelated.size == 0) category_encounters.visibility = View.GONE
+        if (soundsListMisc.size == 0) category_misc.visibility = View.GONE
 
         sound_categories.setOnCheckedChangeListener { _, checkedId ->
             currentSoundsListUnmorphed.clear()
@@ -94,9 +121,26 @@ class SoundboardActivity : AppCompatActivity() {
                     currentSoundsListUnmorphed.addAll(soundsListAbilities)
                     currentSoundsListMorphed.addAll(soundsListAbilitiesMorphed)
                 }
+                id_items -> {
+                    currentSoundsListUnmorphed.addAll(soundsListItems)
+                    currentSoundsListMorphed.addAll(soundsListItemsMorphed)
+                }
+                id_game -> {
+                    currentSoundsListUnmorphed.addAll(soundsListGame)
+                    currentSoundsListMorphed.addAll(soundsListGameMorphed)
+                }
+                id_encounters -> {
+                    currentSoundsListUnmorphed.addAll(soundsListHeroRelated)
+                    currentSoundsListMorphed.addAll(soundsListHeroRelatedMorphed)
+                }
+                id_misc -> {
+                    currentSoundsListUnmorphed.addAll(soundsListMisc)
+                    currentSoundsListMorphed.addAll(soundsListMiscMorphed)
+                }
+
                 else -> {
-                    currentSoundsListUnmorphed.addAll(soundsListAttack)
-                    currentSoundsListMorphed.addAll(soundsListAttackMorphed)
+                    currentSoundsListUnmorphed.addAll(soundsListMisc)
+                    currentSoundsListMorphed.addAll(soundsListMiscMorphed)
                 }
             }
 
@@ -134,9 +178,16 @@ class SoundboardActivity : AppCompatActivity() {
 
         assignHeroToLists()
 
-        currentSoundsListUnmorphed.addAll(soundsListAttack)
-        currentSoundsListMorphed.addAll(soundsListAttackMorphed)
+        // Assign the default selected category
+        if (soundsListAttack.size != 0) {
+            currentSoundsListUnmorphed.addAll(soundsListAttack)
+            currentSoundsListMorphed.addAll(soundsListAttackMorphed)
+        } else {
+            currentSoundsListUnmorphed.addAll(soundsListMisc)
+            currentSoundsListMorphed.addAll(soundsListMiscMorphed)
+        }
         currentSoundsList.addAll(currentSoundsListUnmorphed)
+
 
         soundsRecycler = SoundsRecycler(this, currentSoundsList)
         sounds_grid.adapter = soundsRecycler
@@ -211,6 +262,22 @@ class SoundboardActivity : AppCompatActivity() {
         val soundResListAbilitiesMorphed = ArrayList<Int>()
         val soundTitlesListAbilities = ArrayList<String>()
 
+        val soundResListItems = ArrayList<Int>()
+        val soundResListItemsMorphed = ArrayList<Int>()
+        val soundTitlesListItems = ArrayList<String>()
+
+        val soundResListGame = ArrayList<Int>()
+        val soundResListGameMorphed = ArrayList<Int>()
+        val soundTitlesListGame = ArrayList<String>()
+
+        val soundResListHeroRelated = ArrayList<Int>()
+        val soundResListHeroRelatedMorphed = ArrayList<Int>()
+        val soundTitlesListHeroRelated = ArrayList<String>()
+
+        val soundResListMisc = ArrayList<Int>()
+        val soundResListMiscMorphed = ArrayList<Int>()
+        val soundTitlesListMisc = ArrayList<String>()
+
         when (heroKey) {
             getString(R.string.ti7) -> {
                 imageRes = soundArrays.ti7_board_header
@@ -218,702 +285,724 @@ class SoundboardActivity : AppCompatActivity() {
                 soundTitlesListAttack.addAll(soundArrays.ti7_sound_titles)
             }
 
+            getString(R.string.rickandmorty) -> {
+                imageRes = soundArrays.rickandmorty_board_header
+                soundResListGame.addAll(soundArrays.rickandmorty_sound_res_Game)
+                soundTitlesListGame.addAll(soundArrays.rickandmorty_sound_titles_Game)
+                soundResListHeroRelated.addAll(soundArrays.rickandmorty_sound_res_Encounters)
+                soundTitlesListHeroRelated.addAll(soundArrays.rickandmorty_sound_titles_Encounters)
+                soundResListMisc.addAll(soundArrays.rickandmorty_sound_res_Misc)
+                soundTitlesListMisc.addAll(soundArrays.rickandmorty_sound_titles_Misc)
+            }
+
             getString(R.string.Abaddon) -> {
                 imageRes = soundArrays.board_header_abaddon
-                soundResListAttack.addAll(soundArrays.abaddon_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.abaddon_sound_titles_attack)
-                soundResListAbilities.addAll(soundArrays.abaddon_sound_res_abilities)
-                soundTitlesListAbilities.addAll(soundArrays.abaddon_sound_titles_abilities)
+                soundResListAttack.addAll(soundArrays.abaddon_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.abaddon_sound_titles_Attacks)
+                soundResListAbilities.addAll(soundArrays.abaddon_sound_res_Abilities)
+                soundTitlesListAbilities.addAll(soundArrays.abaddon_sound_titles_Abilities)
+                soundResListHeroRelated.addAll(soundArrays.abaddon_sound_res_Hero_Related)
+                soundTitlesListHeroRelated.addAll(soundArrays.abaddon_sound_titles_Hero_Related)
+                soundResListItems.addAll(soundArrays.abaddon_sound_res_Items)
+                soundTitlesListItems.addAll(soundArrays.abaddon_sound_titles_Items)
+                soundResListMisc.addAll(soundArrays.abaddon_sound_res_Misc)
+                soundTitlesListMisc.addAll(soundArrays.abaddon_sound_titles_Misc)
             }
 
             getString(R.string.Alchemist) -> {
                 imageRes = soundArrays.board_header_alchemist
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundResListAttackMorphed.addAll(soundArrays.alchemist_sound_res_attack_morphed)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
-                soundResListAbilities.addAll(soundArrays.alchemist_sound_res_abilities)
-                soundResListAbilitiesMorphed.addAll(soundArrays.alchemist_sound_res_abilities_morphed)
-                soundTitlesListAbilities.addAll(soundArrays.alchemist_sound_titles_abilities)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
+                soundResListAbilities.addAll(soundArrays.alchemist_sound_res_Abilities)
+                soundTitlesListAbilities.addAll(soundArrays.alchemist_sound_titles_Abilities)
+                soundResListHeroRelated.addAll(soundArrays.alchemist_sound_res_Hero_Related)
+                soundTitlesListHeroRelated.addAll(soundArrays.alchemist_sound_titles_Hero_Related)
+                soundResListItems.addAll(soundArrays.alchemist_sound_res_Items)
+                soundTitlesListItems.addAll(soundArrays.alchemist_sound_titles_Items)
+                soundResListMisc.addAll(soundArrays.alchemist_sound_res_Misc)
+                soundTitlesListMisc.addAll(soundArrays.alchemist_sound_titles_Misc)
             }
 
             getString(R.string.Axe) -> {
                 imageRes = soundArrays.board_header_axe
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
-                soundResListAbilities.addAll(soundArrays.alchemist_sound_res_abilities)
-                soundTitlesListAbilities.addAll(soundArrays.alchemist_sound_titles_abilities)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Beastmaster) -> {
                 imageRes = soundArrays.board_header_beastmaster
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Brewmaster) -> {
                 imageRes = soundArrays.board_header_brewmaster
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Bristleback) -> {
                 imageRes = soundArrays.board_header_bristleback
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Centaur) -> {
                 imageRes = soundArrays.board_header_centaur
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Chaosknight) -> {
                 imageRes = soundArrays.board_header_ck
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Clockwerk) -> {
                 imageRes = soundArrays.board_header_clock
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Doom) -> {
                 imageRes = soundArrays.board_header_doom
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Dragonknight) -> {
                 imageRes = soundArrays.board_header_dk
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Earthspirit) -> {
                 imageRes = soundArrays.board_header_earth
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Earthshaker) -> {
                 imageRes = soundArrays.board_header_es
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Eldertitan) -> {
                 imageRes = soundArrays.board_header_elder
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Huskar) -> {
                 imageRes = soundArrays.board_header_huskar
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Io) -> {
                 imageRes = soundArrays.board_header_io
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Kunkka) -> {
                 imageRes = soundArrays.board_header_kunkka
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
             }
 
             getString(R.string.Legioncommander) -> {
                 imageRes = soundArrays.board_header_lc
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Lifestealer) -> {
                 imageRes = soundArrays.board_header_lifestealer
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Lycan) -> {
                 imageRes = soundArrays.board_header_lycan
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Magnus) -> {
                 imageRes = soundArrays.board_header_magnus
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Nightstalker) -> {
                 imageRes = soundArrays.board_header_ns
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Omniknight) -> {
                 imageRes = soundArrays.board_header_omniknight
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Phoenix) -> {
                 imageRes = soundArrays.board_header_phoenix
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Pudge) -> {
                 imageRes = soundArrays.board_header_pudge
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Sandking) -> {
                 imageRes = soundArrays.board_header_sk
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Slardar) -> {
                 imageRes = soundArrays.board_header_slardar
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Spiritbreaker) -> {
                 imageRes = soundArrays.board_header_sb
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Sven) -> {
                 imageRes = soundArrays.board_header_sven
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Tidehunter) -> {
                 imageRes = soundArrays.board_header_tide
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Timbersaw) -> {
                 imageRes = soundArrays.board_header_timber
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Tiny) -> {
                 imageRes = soundArrays.board_header_tiny
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Treantprotector) -> {
                 imageRes = soundArrays.board_header_treant
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Tusk) -> {
                 imageRes = soundArrays.board_header_tusk
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
             }
 
             getString(R.string.Underlord) -> {
                 imageRes = soundArrays.board_header_underlord
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Undying) -> {
                 imageRes = soundArrays.board_header_undying
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Wraithking) -> {
                 imageRes = soundArrays.board_header_wk
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Antimage) -> {
                 imageRes = soundArrays.board_header_antimage
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Arcwarden) -> {
                 imageRes = soundArrays.board_header_arc
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Bloodseeker) -> {
                 imageRes = soundArrays.board_header_bloodseeker
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Bountyhunter) -> {
                 imageRes = soundArrays.board_header_bh
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Broodmother) -> {
                 imageRes = soundArrays.board_header_brood
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Clinkz) -> {
                 imageRes = soundArrays.board_header_clinkz
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.clinkz_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.clinkz_sound_titles_Attacks)
+                soundResListAbilities.addAll(soundArrays.clinkz_sound_res_Abilities)
+                soundTitlesListAbilities.addAll(soundArrays.clinkz_sound_titles_Abilities)
+                soundResListHeroRelated.addAll(soundArrays.clinkz_sound_res_Hero_Related)
+                soundTitlesListHeroRelated.addAll(soundArrays.clinkz_sound_titles_Hero_Related)
+                soundResListItems.addAll(soundArrays.clinkz_sound_res_Items)
+                soundTitlesListItems.addAll(soundArrays.clinkz_sound_titles_Items)
+                soundResListMisc.addAll(soundArrays.clinkz_sound_res_Misc)
+                soundTitlesListMisc.addAll(soundArrays.clinkz_sound_titles_Misc)
             }
 
             getString(R.string.Drowranger) -> {
                 imageRes = soundArrays.board_header_drow
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Emberspirit) -> {
                 imageRes = soundArrays.board_header_ember
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Facelessvoid) -> {
                 imageRes = soundArrays.board_header_faceless
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Gyrocopter) -> {
                 imageRes = soundArrays.board_header_gyro
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Juggernaut) -> {
                 imageRes = soundArrays.board_header_juggernaut
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Lonedruid) -> {
                 imageRes = soundArrays.board_header_ld
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Luna) -> {
                 imageRes = soundArrays.board_header_luna
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Medusa) -> {
                 imageRes = soundArrays.board_header_medusa
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Meepo) -> {
                 imageRes = soundArrays.board_header_meepo
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Mirana) -> {
                 imageRes = soundArrays.board_header_mirana
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Monkeyking) -> {
                 imageRes = soundArrays.board_header_mk
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Morphling) -> {
                 imageRes = soundArrays.board_header_morph
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Nagasiren) -> {
                 imageRes = soundArrays.board_header_naga
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Nyx) -> {
                 imageRes = soundArrays.board_header_nyx
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Pangolier) -> {
                 imageRes = soundArrays.board_header_pango
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Phantomassassin) -> {
                 imageRes = soundArrays.board_header_pa
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Phantomlancer) -> {
                 imageRes = soundArrays.board_header_pl
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Razor) -> {
                 imageRes = soundArrays.board_header_razor
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Riki) -> {
                 imageRes = soundArrays.board_header_riki
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Shadowfiend) -> {
                 imageRes = soundArrays.board_header_sf
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Slark) -> {
                 imageRes = soundArrays.board_header_slark
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Sniper) -> {
                 imageRes = soundArrays.board_header_sniper
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Spectre) -> {
                 imageRes = soundArrays.board_header_spectre
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Templarassassin) -> {
                 imageRes = soundArrays.board_header_ta
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Terrorblade) -> {
                 imageRes = soundArrays.board_header_terrorblade
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Trollwarlord) -> {
                 imageRes = soundArrays.board_header_troll
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Ursa) -> {
                 imageRes = soundArrays.board_header_ursa
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Vengefulspirit) -> {
                 imageRes = soundArrays.board_header_vengeful
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Venomancer) -> {
                 imageRes = soundArrays.board_header_venomancer
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Viper) -> {
                 imageRes = soundArrays.board_header_viper
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Weaver) -> {
                 imageRes = soundArrays.board_header_weaver
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Ancientapparition) -> {
                 imageRes = soundArrays.board_header_ancient
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.ancientapparition_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.ancientapparition_sound_titles_Attacks)
+                soundResListAbilities.addAll(soundArrays.ancientapparition_sound_res_Abilities)
+                soundTitlesListAbilities.addAll(soundArrays.ancientapparition_sound_titles_Abilities)
+                soundResListHeroRelated.addAll(soundArrays.ancientapparition_sound_res_Hero_Related)
+                soundTitlesListHeroRelated.addAll(soundArrays.ancientapparition_sound_titles_Hero_Related)
+                soundResListItems.addAll(soundArrays.ancientapparition_sound_res_Items)
+                soundTitlesListItems.addAll(soundArrays.ancientapparition_sound_titles_Items)
+                soundResListMisc.addAll(soundArrays.ancientapparition_sound_res_Misc)
+                soundTitlesListMisc.addAll(soundArrays.ancientapparition_sound_titles_Misc)
             }
 
             getString(R.string.Bane) -> {
                 imageRes = soundArrays.board_header_bane
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Batrider) -> {
                 imageRes = soundArrays.board_header_batrider
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
             }
 
             getString(R.string.Chen) -> {
                 imageRes = soundArrays.board_header_chen
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Crystalmaiden) -> {
                 imageRes = soundArrays.board_header_cm
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Darkseer) -> {
                 imageRes = soundArrays.board_header_ds
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Darkwillow) -> {
                 imageRes = soundArrays.board_header_dw
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Dazzle) -> {
                 imageRes = soundArrays.board_header_dazzle
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Deathprophet) -> {
                 imageRes = soundArrays.board_header_dp
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Disruptor) -> {
                 imageRes = soundArrays.board_header_disruptor
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Enchantress) -> {
                 imageRes = soundArrays.board_header_enchantress
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Enigma) -> {
                 imageRes = soundArrays.board_header_enigma
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Invoker) -> {
                 imageRes = soundArrays.board_header_invoker
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Jakiro) -> {
                 imageRes = soundArrays.board_header_jakiro
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Keeperofthelight) -> {
                 imageRes = soundArrays.board_header_kotl
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Leshrac) -> {
                 imageRes = soundArrays.board_header_leshrac
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Lich) -> {
                 imageRes = soundArrays.board_header_lich
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Lina) -> {
                 imageRes = soundArrays.board_header_lina
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Lion) -> {
                 imageRes = soundArrays.board_header_lion
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Naturesprophet) -> {
                 imageRes = soundArrays.board_header_np
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Necrophos) -> {
                 imageRes = soundArrays.board_header_necro
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Ogremagi) -> {
                 imageRes = soundArrays.board_header_ogre
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Oracle) -> {
                 imageRes = soundArrays.board_header_oracle
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Outworlddevourer) -> {
                 imageRes = soundArrays.board_header_od
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Puck) -> {
                 imageRes = soundArrays.board_header_puck
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Pugna) -> {
                 imageRes = soundArrays.board_header_pugna
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Queenofpain) -> {
                 imageRes = soundArrays.board_header_qop
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Rubick) -> {
                 imageRes = soundArrays.board_header_rubick
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Shadowdemon) -> {
                 imageRes = soundArrays.board_header_sd
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Shadowshaman) -> {
                 imageRes = soundArrays.board_header_ss
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Silencer) -> {
                 imageRes = soundArrays.board_header_silencer
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Skywrathmage) -> {
                 imageRes = soundArrays.board_header_sm
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Stormspirit) -> {
                 imageRes = soundArrays.board_header_storm
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Techies) -> {
                 imageRes = soundArrays.board_header_techies
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Tinker) -> {
                 imageRes = soundArrays.board_header_tinker
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Visage) -> {
                 imageRes = soundArrays.board_header_visage
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Warlock) -> {
                 imageRes = soundArrays.board_header_warlock
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             getString(R.string.Windranger) -> {
                 imageRes = soundArrays.board_header_wr
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
             }
 
             getString(R.string.Winterwyvern) -> {
                 imageRes = soundArrays.board_header_ww
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
             }
 
             getString(R.string.Witchdoctor) -> {
                 imageRes = soundArrays.board_header_wd
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
             }
 
             getString(R.string.Zeus) -> {
                 imageRes = soundArrays.board_header_zeus
-                soundResListAttack.addAll(soundArrays.alchemist_sound_res_attack)
-                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_attack)
+                soundResListAttack.addAll(soundArrays.alchemist_sound_res_Attacks)
+                soundTitlesListAttack.addAll(soundArrays.alchemist_sound_titles_Attacks)
             }
 
             else -> {
@@ -925,8 +1014,21 @@ class SoundboardActivity : AppCompatActivity() {
 
         (0 until soundResListAttack.size).mapTo(soundsListAttack) { Sound(soundResListAttack[it], soundTitlesListAttack[it]) }
         (0 until soundResListAttackMorphed.size).mapTo(soundsListAttackMorphed) { Sound(soundResListAttackMorphed[it], soundTitlesListAttack[it]) }
+
         (0 until soundResListAbilities.size).mapTo(soundsListAbilities) { Sound(soundResListAbilities[it], soundTitlesListAbilities[it]) }
         (0 until soundResListAbilitiesMorphed.size).mapTo(soundsListAbilitiesMorphed) { Sound(soundResListAbilitiesMorphed[it], soundTitlesListAbilities[it]) }
+
+        (0 until soundResListItems.size).mapTo(soundsListItems) { Sound(soundResListItems[it], soundTitlesListItems[it]) }
+        (0 until soundResListItemsMorphed.size).mapTo(soundsListItemsMorphed) { Sound(soundResListItemsMorphed[it], soundTitlesListItems[it]) }
+
+        (0 until soundResListGame.size).mapTo(soundsListGame) { Sound(soundResListGame[it], soundTitlesListGame[it]) }
+        (0 until soundResListGameMorphed.size).mapTo(soundsListGameMorphed) { Sound(soundResListGameMorphed[it], soundTitlesListGame[it]) }
+
+        (0 until soundResListHeroRelated.size).mapTo(soundsListHeroRelated) { Sound(soundResListHeroRelated[it], soundTitlesListHeroRelated[it]) }
+        (0 until soundResListHeroRelatedMorphed.size).mapTo(soundsListHeroRelatedMorphed) { Sound(soundResListHeroRelatedMorphed[it], soundTitlesListHeroRelated[it]) }
+
+        (0 until soundResListMisc.size).mapTo(soundsListMisc) { Sound(soundResListMisc[it], soundTitlesListMisc[it]) }
+        (0 until soundResListMiscMorphed.size).mapTo(soundsListMiscMorphed) { Sound(soundResListMiscMorphed[it], soundTitlesListMisc[it]) }
 
         (header_image as ImageView).setImageResource(imageRes)
 

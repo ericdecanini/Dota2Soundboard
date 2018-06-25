@@ -46,8 +46,7 @@
             android:name=".MiscActivity"
             android:label=""
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ScratchActivity" />
-        <activity android:name=".FavouritesActivity"></activity>
+        <activity android:name=".FavouritesActivity" />
     </application>
 
 </manifest>

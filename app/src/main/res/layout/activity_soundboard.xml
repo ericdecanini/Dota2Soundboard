@@ -64,7 +64,9 @@
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -76,6 +78,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="16dp"
                 android:orientation="horizontal">
 
                 <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
@@ -94,6 +97,30 @@
 
                     <pandastudios.dotasound.CategoryButton
                         android:id="@+id/category_abilities"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp" />
+
+                    <pandastudios.dotasound.CategoryButton
+                        android:id="@+id/category_items"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp" />
+
+                    <pandastudios.dotasound.CategoryButton
+                        android:id="@+id/category_game"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp" />
+
+                    <pandastudios.dotasound.CategoryButton
+                        android:id="@+id/category_encounters"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp" />
+
+                    <pandastudios.dotasound.CategoryButton
+                        android:id="@+id/category_misc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp" />

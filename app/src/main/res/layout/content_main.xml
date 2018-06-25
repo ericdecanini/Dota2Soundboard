@@ -32,7 +32,9 @@
                 android:id="@+id/favourites_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -93,7 +95,9 @@
                 android:id="@+id/recents_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"/>
 
         </LinearLayout>
 

@@ -123,6 +123,30 @@
                                 android:layout_height="40dp"
                                 android:layout_marginLeft="8dp" />
 
+                            <pandastudios.dotasound.CategoryButton
+                                android:id="@+id/category_items"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp" />
+
+                            <pandastudios.dotasound.CategoryButton
+                                android:id="@+id/category_game"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp" />
+
+                            <pandastudios.dotasound.CategoryButton
+                                android:id="@+id/category_encounters"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp" />
+
+                            <pandastudios.dotasound.CategoryButton
+                                android:id="@+id/category_misc"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp" />
+
                         </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
 
                             <ImageView
