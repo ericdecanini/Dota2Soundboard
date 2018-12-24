@@ -2,7 +2,7 @@
 <resources>
 
     <style name="HomeHeaderText">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:fontFamily">@font/radiancesemibold</item>
     </style>
 

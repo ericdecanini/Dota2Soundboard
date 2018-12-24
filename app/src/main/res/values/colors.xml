@@ -13,4 +13,7 @@
     <color name="hero_name_colour">#88000000</color>
     <color name="skeleton_colour">#F5F5F5</color>
 
+    <color name="launchpad_gradient_start">#9E9E9E</color>
+    <color name="launchpad_gradient_end">#9FA8DA</color>
+
 </resources>

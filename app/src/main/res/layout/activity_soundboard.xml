@@ -7,88 +7,52 @@
     android:fitsSystemWindows="true"
     tools:context="pandastudios.dotasound.AboutActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/extended_appbar_height"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentScrim="@drawable/header_bg"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_collapseMode="parallax">
-
-                <ImageView
-                    android:id="@+id/header_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/header_dk"
-                    android:transitionName="@string/TRANSITION_IMAGE"
-                    app:layout_collapseMode="parallax" />
-
-                <View
-                    android:id="@+id/scrim"
-                    android:layout_width="match_parent"
-                    android:layout_height="164dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/scrim_bottom_large" />
-
-            </FrameLayout>
+            android:layout_height="wrap_content"
+            android:background="@drawable/header_bg"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                android:layout_height="?android:attr/actionBarSize">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/toolbar_title_text_size" />
 
-    </android.support.design.widget.AppBarLayout>
+            </android.support.v7.widget.Toolbar>
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="16dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="40dp">
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:orientation="horizontal">
+                android:animateLayoutChanges="true">
 
                 <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
                     android:id="@+id/sound_categories"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    app:tbgCheckedButton="@id/category_attack">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:visibility="gone"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp"
+                    app:tbgCheckedButton="@id/category_attack"
+                    app:tbgChildSpacing="auto">
 
                     <pandastudios.dotasound.CategoryButton
                         android:id="@+id/category_attack"
@@ -98,55 +62,90 @@
                     <pandastudios.dotasound.CategoryButton
                         android:id="@+id/category_abilities"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp" />
+                        android:layout_height="wrap_content" />
 
                     <pandastudios.dotasound.CategoryButton
                         android:id="@+id/category_items"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp" />
+                        android:layout_height="wrap_content" />
 
                     <pandastudios.dotasound.CategoryButton
                         android:id="@+id/category_game"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp" />
+                        android:layout_height="wrap_content" />
 
                     <pandastudios.dotasound.CategoryButton
                         android:id="@+id/category_encounters"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp" />
+                        android:layout_height="wrap_content" />
 
                     <pandastudios.dotasound.CategoryButton
                         android:id="@+id/category_misc"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp" />
+                        android:layout_height="wrap_content" />
 
                 </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
 
-                <ImageView
-                    android:id="@+id/morph_button"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:visibility="gone"
-                    android:src="@drawable/ic_unmorphed_silver"/>
+                <include
+                    android:id="@+id/pb_soundboard"
+                    layout="@layout/downloader_ui" />
+
+                <include
+                    android:id="@+id/splash_sounds_not_downloaded"
+                    layout="@layout/splash_sounds_not_downloaded"
+                    android:visibility="gone"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignBottom="@id/sound_categories"
+                    android:layout_alignTop="@id/sound_categories"
+                    android:alpha="0.2"
+                    android:background="#000000" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/morph_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_unmorphed_silver"
+                android:visibility="gone" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/header_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.3"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header_ck"
+                android:transitionName="@string/TRANSITION_IMAGE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/sounds_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp" />
 
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/sounds_grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+        </FrameLayout>
 
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
@@ -154,6 +153,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/admob_id" />
+        ads:adUnitId="@string/admob_unit_id" />
 
 </android.support.design.widget.CoordinatorLayout>

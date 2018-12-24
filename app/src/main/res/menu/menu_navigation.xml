@@ -6,6 +6,10 @@
         android:title="@string/nav_heroes" />
 
     <item
+        android:id="@+id/nav_launchpad"
+        android:title="@string/launchpad" />
+
+    <item
         android:id="@+id/nav_misc"
         android:title="@string/nav_misc" />
 
@@ -14,28 +18,32 @@
         android:title="@string/nav_settings" />
 
     <item
-        android:title=""
-        android:id="@+id/group2">
+        android:id="@+id/nav_feedback"
+        android:title="@string/nav_feedback" />
 
-        <menu>
+    <!--<item-->
+        <!--android:title=""-->
+        <!--android:id="@+id/group2">-->
 
-            <item
-                android:id="@+id/nav_share_facebook"
-                android:icon="@drawable/ic_facebook"
-                android:title="@string/nav_share_facebook" />
+        <!--<menu>-->
 
-            <item
-                android:id="@+id/nav_share_twitter"
-                android:icon="@drawable/ic_twitter"
-                android:title="@string/nav_share_twitter" />
+            <!--<item-->
+                <!--android:id="@+id/nav_share_facebook"-->
+                <!--android:icon="@drawable/ic_facebook"-->
+                <!--android:title="@string/nav_share_facebook" />-->
 
-            <item
-                android:id="@+id/nav_review"
-                android:icon="@drawable/ic_star_black_24dp"
-                android:title="@string/nav_review" />
+            <!--<item-->
+                <!--android:id="@+id/nav_share_twitter"-->
+                <!--android:icon="@drawable/ic_twitter"-->
+                <!--android:title="@string/nav_share_twitter" />-->
 
-        </menu>
+            <!--<item-->
+                <!--android:id="@+id/nav_review"-->
+                <!--android:icon="@drawable/ic_star_black_24dp"-->
+                <!--android:title="@string/nav_review" />-->
 
-    </item>
+        <!--</menu>-->
+
+    <!--</item>-->
 
 </menu>

@@ -1,9 +1,11 @@
 package pandastudios.dotasound
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -92,8 +94,12 @@ class HeroesRecycler(private val context: Context, private val mData: List<Secti
     }
 
     private fun sendHeroIntent(heroName: String) {
+        // If coming from Launchpad Activity
+        val selectingSound = (context as Activity).intent.getIntExtra(context.getString(R.string.INTENT_SELECTING_SOUND), -1)
+
         val intent = Intent(context, SoundboardActivity::class.java)
         intent.putExtra(context.getString(R.string.KEY_HERO), heroName)
+        intent.putExtra(context.getString(R.string.INTENT_SELECTING_SOUND), selectingSound)
         context.startActivity(intent)
     }
 

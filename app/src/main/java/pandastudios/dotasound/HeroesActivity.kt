@@ -1,39 +1,53 @@
 package pandastudios.dotasound
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.view.MenuItem
+import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ArrayAdapter
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_heroes.*
+import pandastudios.dotasound.arrays.MiscArrays
 
 class HeroesActivity : AppCompatActivity() {
 
     val LOG_TAG = HeroesActivity::class.java.simpleName
-    var isPhone: Boolean = false
-    lateinit var soundArrays: SoundArrays
+    var isPhone = false
+
+    lateinit var miscArrays: MiscArrays
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heroes)
+        miscArrays = MiscArrays(this)
         isPhone = resources.getBoolean(R.bool.is_phone)
-        soundArrays = SoundArrays(this)
 
         // Add the up button on the toolbar
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        // Setup Ads
-        setupAds()
-
         // Setup Grid
         if (isPhone) setupGridForPhone() else setupGridForTablet()
+
+        // Show Select Misc view if applicable
+        setupMisc()
     }
 
-    private fun setupAds() {
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
+    private fun setupMisc() {
+        val selectingSound = intent.getIntExtra(getString(R.string.INTENT_SELECTING_SOUND), -1)
+        if (selectingSound > -1) {
+            rl_select_misc.visibility = View.VISIBLE
+            rl_select_misc.setOnClickListener { launchMiscActivity(selectingSound) }
+        }
+    }
+
+    private fun launchMiscActivity(selectingSound: Int) {
+        val intent = Intent(this, MiscActivity::class.java)
+        intent.putExtra(getString(R.string.INTENT_SELECTING_SOUND), selectingSound)
+        startActivity(intent)
     }
 
     private fun setupGridForPhone() {
@@ -128,7 +142,7 @@ class HeroesActivity : AppCompatActivity() {
         // Add the header first
         if (isPhone) list.add(SectionOrRow.createSection(getString(R.string.strength)))
 
-        val icons = soundArrays.strength_heroes
+        val icons = miscArrays.strength_heroes
         val names = resources.getStringArray(R.array.strength_heroes)
 
         // Prevents crashing
@@ -146,7 +160,7 @@ class HeroesActivity : AppCompatActivity() {
         // Add the header first
         if (isPhone) list.add(SectionOrRow.createSection(getString(R.string.agility)))
 
-        val icons = soundArrays.agility_heroes
+        val icons = miscArrays.agility_heroes
         val names = resources.getStringArray(R.array.agility_heroes)
 
         // Prevents crashing
@@ -164,7 +178,7 @@ class HeroesActivity : AppCompatActivity() {
         // Add the header first
         if (isPhone) list.add(SectionOrRow.createSection(getString(R.string.intelligence)))
 
-        val icons = soundArrays.intelligence_heroes
+        val icons = miscArrays.intelligence_heroes
         val names = resources.getStringArray(R.array.intelligence_heroes)
 
         // Prevents crashing
@@ -174,6 +188,17 @@ class HeroesActivity : AppCompatActivity() {
         (0 until names.size).mapTo(list) { SectionOrRow.createRow(Board(icons[it], names[it])) }
 
         return list
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+
+        return false
     }
 
 }

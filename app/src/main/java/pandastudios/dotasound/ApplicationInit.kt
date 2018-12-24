@@ -32,7 +32,7 @@ class ApplicationInit: Application() {
     private fun setupAds() {
         // TODO: Switch to real account id before publishing
 //        MobileAds.initialize(applicationContext, "ca-app-pub-8354184700142633~5407408070")
-        MobileAds.initialize(applicationContext, applicationContext.getString(R.string.admob_id))
+        MobileAds.initialize(applicationContext, applicationContext.getString(R.string.admob_app_id))
 
     }
 

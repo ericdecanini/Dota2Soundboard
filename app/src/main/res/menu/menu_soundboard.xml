@@ -6,6 +6,15 @@
         android:id="@+id/ic_favourite"
         android:icon="@drawable/ic_star_border_white_24dp"
         android:title="@string/favourite"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom"
+        android:orderInCategory="100"/>
+
+    <item
+        android:id="@+id/ic_stop"
+        android:icon="@drawable/ic_stop_white_24dp"
+        android:title="@string/stop"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="50"/>
 
 </menu>

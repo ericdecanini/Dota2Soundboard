@@ -27,7 +27,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:text="@string/nav_heroes"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/toolbar_title_text_size" />
 
             </android.support.v7.widget.Toolbar>
 
@@ -42,6 +42,34 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/rl_select_misc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_select_misc"
+                    android:layout_alignBottom="@id/tv_select_misc"
+                    android:background="#000000"
+                    android:alpha="0.5"/>
+                <TextView
+                    android:id="@+id/tv_select_misc"
+                    style="@style/HomeHeaderText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="16dp"
+                    android:drawableStart="@drawable/ic_play_circle_filled_grey_24dp"
+                    android:gravity="center_vertical"
+                    android:padding="40dp"
+                    android:paddingTop="16dp"
+                    android:visibility="gone"
+                    android:textSize="28sp"
+                    android:text="@string/select_misc_sound"
+                    android:textAllCaps="true" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/strength_group"
@@ -169,13 +197,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/admob_id" />
 
     </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/item_launchpad">
+
+    <com.zhouyou.view.seekbar.SignSeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        app:ssb_section_text_position="bottom_sides"
+        android:paddingTop="24dp"
+        app:ssb_max="100"
+        app:ssb_show_section_mark="false"
+        app:ssb_show_section_text="true"
+        app:ssb_show_thumb_text="false"
+        app:ssb_touch_to_seek="true"
+        app:ssb_sign_arrow_height="5dp"
+        app:ssb_sign_arrow_width="10dp"
+        app:ssb_sign_border_color="#ff0000"
+        app:ssb_sign_border_size="1dp"
+        app:ssb_sign_color="#eeeeee"
+        app:ssb_sign_show_border="true"/>
+
+</FrameLayout>

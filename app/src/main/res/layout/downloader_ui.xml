@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
+    android:padding="32dp">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <com.zhouyou.view.seekbar.SignSeekBar
+        android:id="@+id/pb_progress"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_below="@id/progress_bar"
+        android:layout_marginTop="56dp"
+        app:ssb_touch_to_seek="false"
+        app:ssb_show_sign="false"
+        app:ssb_show_thumb_text="false"
+        app:ssb_show_progress_in_float="false"
+        app:ssb_show_section_text="false" />
+
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pb_progress"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/invoking_sounds"/>
+
+</RelativeLayout>

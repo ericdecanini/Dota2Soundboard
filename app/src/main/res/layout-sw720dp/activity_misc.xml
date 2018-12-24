@@ -27,7 +27,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/nav_misc"
-                android:textSize="18sp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
 
         </android.support.v7.widget.Toolbar>
 

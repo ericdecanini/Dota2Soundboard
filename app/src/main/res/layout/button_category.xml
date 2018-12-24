@@ -7,7 +7,6 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/button_category_size"
         android:layout_height="@dimen/button_category_size"
-        android:background="@drawable/header_bg"
         android:padding="4dp"
         android:src="@drawable/ic_star_border_white_24dp"/>
 

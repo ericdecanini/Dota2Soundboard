@@ -27,7 +27,7 @@
                 android:layout_marginStart="20dp"
                 android:text="@string/favourites"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="@dimen/toolbar_title_text_size" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -68,15 +68,12 @@
                     android:background="@color/textColor" />
             </link.fls.BoundLayout>
 
-
-
-            <GridView
+            <ListView
                 android:id="@+id/favourites_grid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:columnWidth="@dimen/home_full_size"
-                android:numColumns="auto_fit" />
+                android:columnWidth="@dimen/home_full_size" />
 
         </LinearLayout>
 
@@ -86,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/admob_id" />
+                ads:adUnitId="@string/admob_unit_id" />
 
     </FrameLayout>
 

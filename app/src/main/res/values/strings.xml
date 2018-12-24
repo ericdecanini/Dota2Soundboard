@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Dota 2 Soundboard</string>
+    <string name="app_name">Dota Soundboard</string>
     <string name="about">About</string>
-    <string name="version">Version 0.0.1</string>
+    <string name="version">Version 1.0.0</string>
     <string name="facebook_app_id">395721314191782</string>
-    <string name="admob_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_app_id">ca-app-pub-8354184700142633~5407408070</string>
+    <string name="admob_unit_id">ca-app-pub-8354184700142633/6763873922</string>
+    <!--<string name="admob_unit_id">ca-app-pub-3940256099942544/6300978111</string> &lt;!&ndash; Test Ad &ndash;&gt;-->
     <string name="blank"> </string>
 
     <!-- Menu Actions -->
@@ -11,27 +13,48 @@
     <string name="action_about">About</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="OK">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="stop">Stop</string>
+
+    <!-- Download Progress -->
+    <string name="invoking_sounds">Invoking Sounds…</string>
+    <string-array name="loading_texts">
+        <item>Invoking Sounds…</item>
+        <item>Stacking Creeps…</item>
+        <item>Pushing Lanes…</item>
+        <item>Channelling Spells…</item>
+        <item>Restoring Ancient…</item>
+    </string-array>
 
     <!-- Navigation -->
-    <string name="nav_header">&#160;&#160;Dota 2 Soundboard</string>
+    <string name="nav_header">&#160;&#160;Dota Soundboard</string>
     <string name="nav_heroes">Heroes</string>
     <string name="nav_misc">Misc</string>
-    <string name="nav_settings">About Dota 2 Soundboard</string>
+    <string name="nav_settings">About Dota Soundboard</string>
+    <string name="nav_feedback">Send us Feedback</string>
     <string name="nav_share_facebook">Share us on Facebook</string>
     <string name="nav_share_twitter">Tweet about us</string>
     <string name="nav_review">Give us a Review</string>
 
-    <!-- Main Activity Strings -->
+    <!-- Main Activity -->
     <string name="favourites">Favourites</string>
     <string name="recents">Recents</string>
     <string name="discover">Discover</string>
+    <string name="dialog_feedback_title">Preferred Method</string>
+    <string-array name="dialog_feedback_options">
+        <item>Send an Email</item>
+        <item>Leave a Review</item>
+    </string-array>
+    <string name="feedback_email_subject">DotaSoundboard%20Feedback</string>
 
-    <!-- Heroes Activity Strings -->
+    <!-- Heroes Activity -->
     <string name="strength">Strength</string>
     <string name="agility">Agility</string>
     <string name="intelligence">Intelligence</string>
+    <string name="select_misc_sound">Select Misc Sounds</string>
 
-    <!-- Soundboard Activity Strings -->
+    <!-- Soundboard Activity -->
     <string name="added_to_favourites">Added to favourites</string>
     <string name="removed_from_favourites">Removed from favourites</string>
     <string name="favourite">Favourite</string>
@@ -41,25 +64,38 @@
     <string name="FLAG_HAS_MORPH" translatable="false">FLAG_HAS_MORPH</string>
     <string name="TRANSITION_IMAGE" translatable="false">TRANSITION_IMAGE</string>
 
-    <!-- About Activity Strings -->
-    <string name="about_title">Dota 2 Soundboard</string>
+    <!-- Launchpad Activity -->
+    <string name="launchpad">Launchpad</string>
+    <string name="toast_launchpad_prompt_longpress">Press and hold to assign a sound</string>
+    <string name="launchpad_title_default">Launchpad %1$d</string>
+    <string name="show_volume_control">Show volume control</string>
+    <string name="dialog_set_launchpad_title">Set Launchpad Title</string>
+    <string name="PREFERENCE_LAUNCHPAD_NUMBER">PREFERENCE_LAUNCHPAD_NUMBER</string>
+    <string name="PREFERENCE_SHOW_VOLUME_CONTROL">PREFERENCE_SHOW_VOLUME_CONTROL</string>
+    <string name="INTENT_SELECTING_SOUND">FLAG_SELECTING_SOUND</string>
+    <string name="INTENT_EXTRA_URI">INTENT_EXTRA_URI</string>
+
+    <!-- About Activity -->
+    <string name="about_title">Dota Soundboard</string>
     <string name="about_contact">Contact Us</string>
     <string name="about_email">Email:&#160;</string>
-    <string name="email">eddecanini@gmail.com</string>
+    <string name="email">tinker@dota2soundboard.com</string>
     <string name="about_lead_developer">Lead Developer:</string>
     <string name="about_eric">Eric Decanini</string>
     <string name="about_assistant_developer">Assistant Developer</string>
     <string name="about_michael">Michael Sumner</string>
     <string name="about_graphics">Graphics and Design</string>
     <string name="about_disclaimer_header">Disclaimer:</string>
-    <string name="disclaimer">Dota 2 Soundboard (“The App”) is created by Panda Development Studios (“The Developer”) for the
-        purpose inclusive of entertainment. The App does not hold rights nor claims and copyrights to its designs and resources.
-        These designs and resources are rightfully owned, claimed, and copyrighted by their owners.</string>
+    <string name="disclaimer">THIS TOOL IS NOT SPONSORED, CREATED, OR ENDORSED BY VALVE CORPORATION.
+Dota Soundboard (“The App”) is developed by Eric Decanini (“The Developer”) for the purpose inclusive of entertainment. The App and The Developer do not hold rights or claims and copyrights to The App designs and resources. These designs and resources are rightfully owned, claimed, and copyrighted by their respective owners including Valve Corporation and Imgur and usage for this game service falls within fair use policies. The App is not officially recognised nor connected to the game’s developer or publisher. The App is created with the intent of collating sounds from the public Dota 2 Wiki in a friendly user experience.
+</string>
 
-    <string name="intent_share">Check out Dota 2 Soundboard!</string>
+    <string name="intent_share">Check out Dota Soundboard!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="download">download</string>
+    <string name="sounds_not_downloaded">Sounds not downloaded</string>
 
 
 </resources>

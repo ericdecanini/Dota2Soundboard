@@ -1,18 +1,18 @@
 package pandastudios.dotasound
 
+import android.net.Uri
 import org.parceler.Parcel
-import pandastudios.dotasound.R.id.name
 
 @Parcel
 class Sound {
 
-    var soundRes: Int = 0
+    lateinit var soundUri: String
     var title: String = ""
 
     constructor() : super()
 
-    constructor(soundRes: Int, title: String) : super() {
-        this.soundRes = soundRes
+    constructor(soundUri: String, title: String) : super() {
+        this.soundUri = soundUri
         this.title = title
     }
 

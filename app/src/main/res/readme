@@ -3,5 +3,5 @@ Many of the operations in the soundboard are automated to make adding new conten
 ADDING SOUNDBOARDS
 1. Add the raw files to the project
 2. Arrays.xml contains soundboard title and item titles
-4. Reference the free and premium raw int resources and string titles in SoundArrays.kt as well as the board header int res
+4. Reference the free and premium raw int resources and string titles in SoundArraysS1.kt as well as the board header int res
 5. Add the when condition to identify the key in SoundboardActivity.kt

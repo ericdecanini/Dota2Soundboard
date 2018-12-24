@@ -16,7 +16,7 @@ class HomeRecycler(private val context: Context, private val mData: ArrayList<Bo
 
     internal var LOG_TAG = HomeRecycler::class.java.simpleName
 
-    override fun getItemCount(): Int = mData.size
+    override fun getItemCount(): Int = Math.min(mData.size, 3)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item_home, parent, false)

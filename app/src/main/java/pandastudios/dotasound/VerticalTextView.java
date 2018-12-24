@@ -18,6 +18,8 @@ public class VerticalTextView extends android.support.v7.widget.AppCompatTextVie
             topDown = false;
         }else
             topDown = true;
+
+
     }
 
     @Override

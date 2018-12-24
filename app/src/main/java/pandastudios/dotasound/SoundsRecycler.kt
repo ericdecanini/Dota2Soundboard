@@ -1,23 +1,44 @@
 package pandastudios.dotasound
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
-import android.os.Handler
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.os.ParcelFileDescriptor.MODE_READ_ONLY
+import android.os.ParcelFileDescriptor
+import android.content.res.AssetFileDescriptor
+import com.facebook.FacebookSdk.getCacheDir
+import java.io.File
+import android.content.res.AssetManager.ACCESS_BUFFER
+import android.net.Uri
+import android.util.Log
+import com.google.common.io.ByteStreams
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 class SoundsRecycler(private val context: Context, private val mData: ArrayList<Sound>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     internal var LOG_TAG = SoundsRecycler::class.java.simpleName
-    private var mPlayer: MediaPlayer? = null
+    private var mPlayer = MediaPlayer()
+
+    var expansionFiles: ZipResourceFile? = null
+    val expansionVersion = context.resources.getInteger(R.integer.expansion_version)
 
     override fun getItemCount(): Int = mData.size
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder?) {
+        super.onViewAttachedToWindow(holder)
+        expansionFiles?: run {
+            expansionFiles = APKExpansionSupport.getAPKExpansionZipFile(context, expansionVersion, 0)
+        }
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.grid_item_button, parent, false)
@@ -28,14 +49,68 @@ class SoundsRecycler(private val context: Context, private val mData: ArrayList<
         val item = mData[position]
         val h = holder as ViewHolder
 
+        // Make button invisible if "Sound" is blank
+        if (item.soundUri == "" && item.title == "") {
+            h.button.visibility = View.INVISIBLE
+        } else h.button.visibility = View.VISIBLE
+
         h.button.text = item.title
         h.button.setOnClickListener {
-            val soundRes = item.soundRes
-            mPlayer = MediaPlayer.create(context, soundRes)
-            mPlayer!!.setOnCompletionListener { mediaPlayer ->
-                mediaPlayer.release()
+            // This is where a sound button is pressed
+            val soundPath =  Uri.parse(item.soundUri).lastPathSegment
+
+            // Check if in Sound Selection mode (Launchpad)
+            val selectingSound = (context as Activity).intent.getIntExtra(context.getString(R.string.INTENT_SELECTING_SOUND), -1)
+
+            // Return to Launchpad if so-
+            if (selectingSound > -1) {
+                val intent = Intent(context, LaunchpadActivity::class.java)
+                intent.putExtra(context.getString(R.string.INTENT_EXTRA_URI), Uri.parse(item.soundUri).lastPathSegment)
+                intent.putExtra(context.getString(R.string.INTENT_SELECTING_SOUND), selectingSound)
+                context.startActivity(intent)
+                return@setOnClickListener
             }
-            mPlayer!!.start()
+
+            // Parse sound asset Uri into AFD and pass into MediaPlayer
+//            val cacheFile = File(getCacheDir(), soundPath)
+//            cacheFile.parentFile.mkdirs()
+//            copyToCacheFile(soundPath, cacheFile)
+//            val soundAfd = AssetFileDescriptor(ParcelFileDescriptor.open(cacheFile, MODE_READ_ONLY), 0, -1)
+
+            expansionFiles?:run{ return@setOnClickListener }
+            val soundAfd = expansionFiles!!.getAssetFileDescriptor(soundPath)
+
+            if ((context as SoundboardActivity).isHeroKeyMusic()) {
+                mPlayer.reset()
+            } else {
+                mPlayer = MediaPlayer()
+            }
+
+            mPlayer.setDataSource(soundAfd.fileDescriptor, soundAfd.startOffset, soundAfd.length)
+            mPlayer.prepare()
+
+
+            mPlayer.setOnCompletionListener { mediaPlayer ->
+                mediaPlayer.reset()
+            }
+
+            mPlayer.start()
+        }
+    }
+
+    fun stopMusic() {
+        mPlayer.stop()
+    }
+
+    @Throws(IOException::class)
+    private fun copyToCacheFile(assetPath: String, cacheFile: File) {
+        val inputStream = context.assets.open(assetPath, ACCESS_BUFFER)
+        inputStream.use { inputStream ->
+            val fileOutputStream = FileOutputStream(cacheFile, false)
+            fileOutputStream.use { fileOutputStream ->
+                //using Guava IO lib to copy the streams, but could also do it manually
+                ByteStreams.copy(inputStream, fileOutputStream)
+            }
         }
     }
 

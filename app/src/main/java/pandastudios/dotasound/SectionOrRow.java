@@ -17,6 +17,7 @@ public class SectionOrRow {
         SectionOrRow ret = new SectionOrRow();
         ret.section = section;
         ret.isRow = false;
+
         return ret;
     }
 
