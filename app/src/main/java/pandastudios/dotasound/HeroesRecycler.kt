@@ -97,7 +97,7 @@ class HeroesRecycler(private val context: Context, private val mData: List<Secti
         // If coming from Launchpad Activity
         val selectingSound = (context as Activity).intent.getIntExtra(context.getString(R.string.INTENT_SELECTING_SOUND), -1)
 
-        val intent = Intent(context, SoundboardActivity::class.java)
+        val intent = Intent(context, SampleTabActivity::class.java)
         intent.putExtra(context.getString(R.string.KEY_HERO), heroName)
         intent.putExtra(context.getString(R.string.INTENT_SELECTING_SOUND), selectingSound)
         context.startActivity(intent)

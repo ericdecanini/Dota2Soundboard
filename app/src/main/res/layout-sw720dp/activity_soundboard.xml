@@ -90,6 +90,11 @@
                     android:id="@+id/pb_soundboard"
                     layout="@layout/downloader_ui" />
 
+                <include
+                    android:id="@+id/splash_sounds_not_downloaded"
+                    layout="@layout/splash_sounds_not_downloaded"
+                    android:visibility="gone"/>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

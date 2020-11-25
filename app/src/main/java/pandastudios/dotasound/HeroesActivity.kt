@@ -39,6 +39,7 @@ class HeroesActivity : AppCompatActivity() {
     private fun setupMisc() {
         val selectingSound = intent.getIntExtra(getString(R.string.INTENT_SELECTING_SOUND), -1)
         if (selectingSound > -1) {
+            toolbar_title.text = getString(R.string.selecting_sound)
             rl_select_misc.visibility = View.VISIBLE
             rl_select_misc.setOnClickListener { launchMiscActivity(selectingSound) }
         }

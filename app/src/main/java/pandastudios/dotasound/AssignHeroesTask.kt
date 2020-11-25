@@ -3,13 +3,16 @@ package pandastudios.dotasound
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import com.google.android.gms.ads.AdRequest
 import pandastudios.dotasound.arrays.*
+import java.io.File
 
 class AssignHeroesTask(var listener: OnAssignHeroesCompleted, var context: Context) : AsyncTask<String, Void, Bundle>() {
 
     val LOG_TAG = AssignHeroesTask::class.java.simpleName
+    var heroKey = ""
 
     override fun doInBackground(vararg heroKey: String): Bundle {
         val soundsListAttack = ArrayList<Sound>()
@@ -49,14 +52,14 @@ class AssignHeroesTask(var listener: OnAssignHeroesCompleted, var context: Conte
         val soundUriListMiscMorphed = ArrayList<String>()
         val soundTitlesListMisc = ArrayList<String>()
 
-        val miscArrays = MiscArrays(context)
-
+        val miscArrays = MiscArrays(context) // Init all arrays
         var imageRes: Int
 
         // Safety Check
         if (heroKey.size != 1)
             return Bundle()
 
+        this.heroKey = heroKey[0]
         when (heroKey[0]) {
             context.getString(R.string.ti7) -> {
                 imageRes = miscArrays.ti7_board_header
@@ -89,8 +92,8 @@ class AssignHeroesTask(var listener: OnAssignHeroesCompleted, var context: Conte
             context.getString(R.string.rickandmorty) -> {
                 val soundArraysMisc = SoundArraysMisc(context)
                 imageRes = miscArrays.rickandmorty_board_header
-                soundUriListGame.addAll(soundArraysMisc.rickandmorty_sound_res_Game)
-                soundTitlesListGame.addAll(soundArraysMisc.rickandmorty_sound_titles_Game)
+                soundUriListAttack.addAll(soundArraysMisc.rickandmorty_sound_res_Game)
+                soundTitlesListAttack.addAll(soundArraysMisc.rickandmorty_sound_titles_Game)
                 soundUriListHeroRelated.addAll(soundArraysMisc.rickandmorty_sound_res_Encounters)
                 soundTitlesListHeroRelated.addAll(soundArraysMisc.rickandmorty_sound_titles_Encounters)
                 soundUriListMisc.addAll(soundArraysMisc.rickandmorty_sound_res_Misc)
@@ -1388,6 +1391,21 @@ class AssignHeroesTask(var listener: OnAssignHeroesCompleted, var context: Conte
                 soundTitlesListMisc.addAll(soundArraysI2.enigma_sound_titles_Misc)
             }
 
+            context.getString(R.string.Grimstroke) -> {
+                val soundArraysI4 = SoundArraysI4(context)
+                imageRes = miscArrays.board_header_grimstroke
+                soundUriListAttack.addAll(soundArraysI4.grimstroke_sound_res_Attack)
+                soundTitlesListAttack.addAll(soundArraysI4.grimstroke_sound_titles_Attack)
+                soundUriListAbilities.addAll(soundArraysI4.grimstroke_sound_res_Abilities)
+                soundTitlesListAbilities.addAll(soundArraysI4.grimstroke_sound_titles_Abilities)
+                soundUriListHeroRelated.addAll(soundArraysI4.grimstroke_sound_res_Hero_Related)
+                soundTitlesListHeroRelated.addAll(soundArraysI4.grimstroke_sound_titles_Hero_Related)
+                soundUriListItems.addAll(soundArraysI4.grimstroke_sound_res_Items)
+                soundTitlesListItems.addAll(soundArraysI4.grimstroke_sound_titles_Items)
+                soundUriListMisc.addAll(soundArraysI4.grimstroke_sound_res_Misc)
+                soundTitlesListMisc.addAll(soundArraysI4.grimstroke_sound_titles_Misc)
+            }
+
             context.getString(R.string.Invoker) -> {
                 val soundArraysI2 = SoundArraysI2(context)
                 imageRes = miscArrays.board_header_invoker
@@ -1867,7 +1885,12 @@ class AssignHeroesTask(var listener: OnAssignHeroesCompleted, var context: Conte
     }
 
     override fun onPostExecute(result: Bundle?) {
-        listener.onAssignHeroesCompleted(false, result!!)
+        // Check if ZIP folder is available
+        val soundZip = File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), heroKey.replace(" ", ""))
+        val available = soundZip.exists()
+
+        // Trigger the callback to SoundboardActivity
+        listener.onAssignHeroesCompleted(available, result!!)
     }
 
 

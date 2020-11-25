@@ -220,7 +220,6 @@ class DbHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             insertLaunchpad(id, context.getString(R.string.launchpad_title_default, id + 1), utility.generateNullSoundUris(context), utility.generateDefaultSoundVolumes(context))
             return arrayOfNulls(buttonCount)
         }
-        Log.d(LOG_TAG, "Cursor id: $id")
         cursor.moveToFirst()
 
         // Get the sounds that are saved plus nulls to make 16/32 items

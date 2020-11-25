@@ -1,6 +1,5 @@
 package pandastudios.dotasound
 
-import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -14,13 +13,20 @@ import com.google.android.gms.ads.AdRequest
 import com.muddzdev.styleabletoastlibrary.StyleableToast
 import pandastudios.dotasound.data.DbHelper
 import android.media.AudioManager
-import android.media.MediaPlayer
+import android.net.Uri
+import android.os.Environment
+import android.os.FileObserver
 import android.os.Handler
+import android.support.v4.app.FragmentActivity
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_soundboard.view.*
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.downloader_ui.*
-import pandastudios.dotasound.R.id.*
+import kotlinx.android.synthetic.main.splash_sounds_not_downloaded.*
+import net.lingala.zip4j.core.ZipFile
+import net.lingala.zip4j.exception.ZipException
+import pandastudios.dotasound.R.id.morph_button
 import pandastudios.dotasound.arrays.*
+import java.io.File
 
 
 @Suppress("PLUGIN_WARNING")
@@ -87,7 +93,7 @@ class SoundboardActivity : AppCompatActivity(), OnLoadAdsCompleted, OnAssignHero
 
         // Setup the elements of the activity
         setupToolbar()
-        setupGrids()
+        setupSoundboard()
         setupAds()
     }
 
@@ -183,9 +189,9 @@ class SoundboardActivity : AppCompatActivity(), OnLoadAdsCompleted, OnAssignHero
         toolbar_title.text = heroKey
     }
 
-    private fun setupGrids() {
+    private fun setupSoundboard() {
         val numColumns = if (isTen) 3 else 2
-
+        btn_sounds_not_downloaded.setOnClickListener { downloadSoundboard() }
         assignHeroToLists()
 
         soundsRecycler = SoundsRecycler(this, currentSoundsList)
@@ -199,6 +205,46 @@ class SoundboardActivity : AppCompatActivity(), OnLoadAdsCompleted, OnAssignHero
             morph_button.setOnClickListener { toggleMorph() }
         }
 
+    }
+
+    private fun downloadSoundboard() {
+        // Setup Firebase Storage
+        val storage = FirebaseStorage.getInstance()
+        val heroRef = storage.reference.child("sounds").child("${heroKey.toLowerCase()}.zip")
+
+        // Setup local file
+        val heroFile = File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), heroKey)
+
+        // Prepare the UI
+        splash_sounds_not_downloaded.visibility = View.GONE
+        pb_soundboard.visibility = View.VISIBLE
+        tv_progress.text = getString(R.string.downloading_hero, heroKey)
+
+        // Download the file
+        heroRef.getFile(heroFile).addOnCompleteListener {
+            if (it.isCanceled) {
+                // Handle error
+                Log.e(LOG_TAG, "Error downloading sounds: ${it.exception?.message}")
+                pb_soundboard.visibility = View.GONE
+                splash_sounds_not_downloaded.visibility = View.VISIBLE
+                tv_sounds_not_downloaded.text = getString(R.string.error_downloading_sounds)
+                return@addOnCompleteListener
+            }
+
+            // DOWNLOAD COMPLETE
+            tv_progress.text = getString(R.string.unzipping_hero, heroKey)
+            unzipHero(heroFile.path)
+        }
+    }
+
+    private fun unzipHero(path: String) {
+        val destination = path.replace(Uri.parse(path).lastPathSegment, "")
+        try {
+            ZipFile(path).extractAll(destination)
+            assignHeroToLists()
+        } catch (e: ZipException) {
+            e.printStackTrace()
+        }
     }
 
     private fun toggleMorph() {
@@ -279,6 +325,17 @@ class SoundboardActivity : AppCompatActivity(), OnLoadAdsCompleted, OnAssignHero
     }
 
     override fun onAssignHeroesCompleted(available: Boolean, bundle: Bundle) {
+        // Update the UI
+        pb_soundboard.visibility = View.GONE
+        handler.removeCallbacksAndMessages(null)
+
+        if (!available) {
+            splash_sounds_not_downloaded.visibility = View.VISIBLE
+            return
+        } else {
+            splash_sounds_not_downloaded.visibility = View.GONE
+        }
+
         // Add to the Arrays
         imageRes = bundle.getInt("imageRes")
         soundsListAttack.addAll(bundle.getSerializable("soundsListAttack") as ArrayList<Sound>)
@@ -292,16 +349,14 @@ class SoundboardActivity : AppCompatActivity(), OnLoadAdsCompleted, OnAssignHero
         soundsListHeroRelated.addAll(bundle.getSerializable("soundsListHeroRelated") as ArrayList<Sound>)
         soundsListHeroRelatedMorphed.addAll(bundle.getSerializable("soundsListHeroRelated") as ArrayList<Sound>)
         soundsListMisc.addAll(bundle.getSerializable("soundsListMisc") as ArrayList<Sound>)
-        soundsListMiscMorphed.addAll(bundle.getSerializable("soundsListMisc") as ArrayList<Sound>)
+        soundsListMiscMorphed.addAll(bundle.getSerializable("soundsListMisc") as ArrayList<Sound>) // Add all sounds to category arrays
 
         // Add current and blank sounds (UX against ad)
         currentSoundsList.addAll(if (soundsListAttack.size > 0) soundsListAttack else soundsListGame)
         currentSoundsList.add(Sound("", ""))
         currentSoundsList.add(Sound("", ""))
 
-        // Update the UI
-        pb_soundboard.visibility = View.GONE
-        handler.removeCallbacksAndMessages(null)
+
 
         (header_image as ImageView).setImageResource(imageRes)
         setupCategories()

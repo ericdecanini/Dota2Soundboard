@@ -31,7 +31,7 @@ class HomeRecycler(private val context: Context, private val mData: ArrayList<Bo
         h.image.setImageResource(hero.img)
 
         h.parent.setOnClickListener {
-            val intent = Intent(context, SoundboardActivity::class.java)
+            val intent = Intent(context, SampleTabActivity::class.java)
             intent.putExtra(context.getString(R.string.KEY_HERO), hero.name)
             context.startActivity(intent)
         }

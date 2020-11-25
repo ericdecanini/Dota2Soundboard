@@ -10,13 +10,14 @@
 
     <include
         android:id="@+id/pb_launchpad"
+        android:visibility="gone"
         layout="@layout/downloader_ui" />
 
     <LinearLayout
         android:id="@+id/master_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout

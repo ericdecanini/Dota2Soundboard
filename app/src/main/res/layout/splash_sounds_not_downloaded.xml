@@ -12,6 +12,7 @@
         android:src="@drawable/splash_not_downloaded"/>
 
     <TextView
+        android:id="@+id/tv_sounds_not_downloaded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sounds_not_downloaded"

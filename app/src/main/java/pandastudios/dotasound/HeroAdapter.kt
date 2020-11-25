@@ -36,22 +36,22 @@ class HeroAdapter(internal var c: Context, @param:LayoutRes internal var resourc
             holder = row.tag as ViewHolder
         }
 
-        holder.name!!.text = hero.name
-        holder.image!!.setImageResource(hero.img)
-        val portrait = holder.image!!.parent as View
+        holder.name.text = hero.name
+        holder.image.setImageResource(hero.img)
+        val portrait = holder.image.parent as View
 
-        portrait.setOnTouchListener(View.OnTouchListener { view, event ->
+        portrait.setOnTouchListener { view, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Spruce.SpruceBuilder(view.parent as ViewGroup)
                         .sortWith(DefaultSort(50L))
                         .animateWith(Animations.growAnimator(view, anim_duration_short))
                         .start()
-                holder!!.name!!.visibility = View.VISIBLE
+                holder.name.visibility = View.VISIBLE
                 idleGrow(view)
             } else if (event.action == MotionEvent.ACTION_UP || event.action == MotionEvent.ACTION_CANCEL) {
                 if (event.action == MotionEvent.ACTION_UP) {
                     // Handle OnClick event here
-                    context.startActivity(Intent(context, SoundboardActivity::class.java))
+                    context.startActivity(Intent(context, SampleTabActivity::class.java))
                 }
                 Spruce.SpruceBuilder(view.parent as ViewGroup)
                         .sortWith(DefaultSort(50L))
@@ -61,11 +61,11 @@ class HeroAdapter(internal var c: Context, @param:LayoutRes internal var resourc
                         .sortWith(DefaultSort(50L))
                         .animateWith(Animations.shrinkAnimatorSmall(view, 10L))
                         .start()
-                holder!!.name!!.visibility = View.GONE
+                holder.name.visibility = View.GONE
                 handler.removeCallbacksAndMessages(null)
             }
             true
-        })
+        }
 
         return row!!
     }

@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Dota2Soundboard.iml" filepath="$PROJECT_DIR$/Dota2Soundboard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/downloader_library/downloader_library.iml" filepath="$PROJECT_DIR$/downloader_library/downloader_library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/market_licensing/market_licensing.iml" filepath="$PROJECT_DIR$/market_licensing/market_licensing.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zip_file/zip_file.iml" filepath="$PROJECT_DIR$/zip_file/zip_file.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dota2Soundboard.iml" filepath="$PROJECT_DIR$/Dota2Soundboard.iml" group="Dota2Soundboard" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Dota2Soundboard/app" />
+      <module fileurl="file://$PROJECT_DIR$/downloader_library/downloader_library.iml" filepath="$PROJECT_DIR$/downloader_library/downloader_library.iml" group="Dota2Soundboard/downloader_library" />
+      <module fileurl="file://$PROJECT_DIR$/market_licensing/market_licensing.iml" filepath="$PROJECT_DIR$/market_licensing/market_licensing.iml" group="Dota2Soundboard/market_licensing" />
+      <module fileurl="file://$PROJECT_DIR$/zip_file/zip_file.iml" filepath="$PROJECT_DIR$/zip_file/zip_file.iml" group="Dota2Soundboard/zip_file" />
     </modules>
   </component>
 </project>

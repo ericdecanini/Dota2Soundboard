@@ -102,10 +102,10 @@ class SoundArraysMisc(val context: Context) {
 
     // The Internationals 2018
     val ti8_sound_res_Attacks = arrayListOf(
-    "easiest_money_of_my_life.mp3",
-    "echo_slamma_jamma.mp3",
-    "lakad_matataaag_normalin_normalin.mp3",
-    "oh_my_lord.mp3",
+    "ti8_easiest_money_of_my_life.mp3",
+    "ti8_echo_slamma_jamma.mp3",
+    "ti8_lakad_matataaag_normalin_normalin.mp3",
+    "ti8_oh_my_lord.mp3",
     "ti8_bock_bock.mp3",
     "ti8_kiss.mp3",
     "ti8_oww.mp3",
@@ -118,16 +118,16 @@ class SoundArraysMisc(val context: Context) {
     "ti8_what_just_happened.mp3",
     "ti8_yahoo.mp3",
     "ti8_youre_a_goddamn_hero.mp3",
-    "ti8_оже_как_это_ольно.mp3",
-    "ti8_как_же_это_сочно_ах.mp3",
-    "ti8_красавчик.mp3",
-    "ti8_ой_ой_ой_ой_ой_бежать.mp3",
-    "ti8_это_ненормально_это_нечестно.mp3",
-    "ti8_你气不气.mp3",
-    "ti8_啊_队友呢.mp3",
-    "ti8_葫芦娃救爷爷.mp3",
-    "ti8_这就是高富帅啊.mp3",
-    "ti8_这波不亏_666.mp3"
+    "ti8_oxe_kak_eto_orbho.mp3",
+    "ti8_kak_xe_eto_conho_ax.mp3",
+    "ti8_kpacabynk.mp3",
+    "ti8_on_on_on_on_on_exatb.mp3",
+    "ti8_eto_hehopmarbho_eto_herectho.mp3",
+    "ti8_nitsibusher.mp3",
+    "ti8_vetuyola.mp3",
+    "ti8_vuloyatoyeyema.mp3",
+    "ti8_sauzhufukauseyema.mp3",
+    "ti8_samuvuke_666.mp3"
     )
 
     val ti8_sound_titles_Attacks = arrayListOf<String>(

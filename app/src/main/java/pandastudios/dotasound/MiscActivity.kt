@@ -31,6 +31,7 @@ class MiscActivity : AppCompatActivity() {
 
     private fun checkIncomingIntent() {
         if (intent.hasExtra(getString(R.string.INTENT_SELECTING_SOUND))) {
+            toolbar_title.text = getString(R.string.selecting_sound)
             selectingSound = intent.getIntExtra(getString(R.string.INTENT_SELECTING_SOUND), -1)
         }
     }
@@ -53,7 +54,7 @@ class MiscActivity : AppCompatActivity() {
         misc_grid.adapter = MiscAdapter(this, R.layout.grid_item_misc, misc_items)
 
         misc_grid.setOnItemClickListener {_,_, i, _ ->
-            val intent = Intent(this, SoundboardActivity::class.java)
+            val intent = Intent(this, SampleTabActivity::class.java)
             intent.putExtra(getString(R.string.KEY_HERO), misc_items[i].name)
 
             if (selectingSound > -1)

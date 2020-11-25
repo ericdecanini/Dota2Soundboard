@@ -101,6 +101,7 @@ class MiscArrays(val context: Context) {
             R.drawable.hero_disruptor,
             R.drawable.hero_enchantress,
             R.drawable.hero_enigma,
+            R.drawable.hero_grimstroke,
             R.drawable.hero_invoker,
             R.drawable.hero_jakiro,
             R.drawable.hero_kotl,
@@ -236,6 +237,7 @@ class MiscArrays(val context: Context) {
     val board_header_disruptor = R.drawable.header_disruptor
     val board_header_enchantress = R.drawable.header_enchantress
     val board_header_enigma = R.drawable.header_enigma
+    val board_header_grimstroke = R.drawable.header_grimstroke
     val board_header_invoker = R.drawable.header_invoker
     val board_header_jakiro = R.drawable.header_jakiro
     val board_header_kotl = R.drawable.header_kotl
@@ -359,6 +361,7 @@ class MiscArrays(val context: Context) {
             board_header_disruptor,
             board_header_enchantress,
             board_header_enigma,
+            board_header_grimstroke,
             board_header_invoker,
             board_header_jakiro,
             board_header_kotl,

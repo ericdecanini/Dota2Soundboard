@@ -35,7 +35,7 @@ class FavouritesActivity : AppCompatActivity() {
         favourites_grid.adapter = MiscAdapter(this, R.layout.list_item_home, favouritesList)
 
         favourites_grid.setOnItemClickListener { _, _, i, _ ->
-            val intent = Intent(this, SoundboardActivity::class.java)
+            val intent = Intent(this, SampleTabActivity::class.java)
             intent.putExtra(getString(R.string.KEY_HERO), favouritesList[i].name)
             startActivity(intent)
         }

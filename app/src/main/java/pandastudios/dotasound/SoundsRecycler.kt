@@ -12,12 +12,14 @@ import android.widget.Button
 import android.os.ParcelFileDescriptor.MODE_READ_ONLY
 import android.os.ParcelFileDescriptor
 import android.content.res.AssetFileDescriptor
-import com.facebook.FacebookSdk.getCacheDir
 import java.io.File
 import android.content.res.AssetManager.ACCESS_BUFFER
 import android.net.Uri
+import android.os.Environment
+import android.text.TextUtils.replace
 import android.util.Log
 import com.google.common.io.ByteStreams
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 
@@ -27,16 +29,12 @@ class SoundsRecycler(private val context: Context, private val mData: ArrayList<
     internal var LOG_TAG = SoundsRecycler::class.java.simpleName
     private var mPlayer = MediaPlayer()
 
-    var expansionFiles: ZipResourceFile? = null
     val expansionVersion = context.resources.getInteger(R.integer.expansion_version)
 
     override fun getItemCount(): Int = mData.size
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder?) {
         super.onViewAttachedToWindow(holder)
-        expansionFiles?: run {
-            expansionFiles = APKExpansionSupport.getAPKExpansionZipFile(context, expansionVersion, 0)
-        }
 
     }
 
@@ -56,7 +54,7 @@ class SoundsRecycler(private val context: Context, private val mData: ArrayList<
 
         h.button.text = item.title
         h.button.setOnClickListener {
-            // This is where a sound button is pressed
+            // Sound button is pressed
             val soundPath =  Uri.parse(item.soundUri).lastPathSegment
 
             // Check if in Sound Selection mode (Launchpad)
@@ -68,22 +66,33 @@ class SoundsRecycler(private val context: Context, private val mData: ArrayList<
                 intent.putExtra(context.getString(R.string.INTENT_EXTRA_URI), Uri.parse(item.soundUri).lastPathSegment)
                 intent.putExtra(context.getString(R.string.INTENT_SELECTING_SOUND), selectingSound)
                 context.startActivity(intent)
+                context.finish()
                 return@setOnClickListener
             }
 
             // Parse sound asset Uri into AFD and pass into MediaPlayer
-//            val cacheFile = File(getCacheDir(), soundPath)
-//            cacheFile.parentFile.mkdirs()
-//            copyToCacheFile(soundPath, cacheFile)
-//            val soundAfd = AssetFileDescriptor(ParcelFileDescriptor.open(cacheFile, MODE_READ_ONLY), 0, -1)
+            val soundFile = File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), soundPath)
+            var soundAfd: AssetFileDescriptor? = null
 
-            expansionFiles?:run{ return@setOnClickListener }
-            val soundAfd = expansionFiles!!.getAssetFileDescriptor(soundPath)
+            try {
+                soundAfd = AssetFileDescriptor(ParcelFileDescriptor.open(soundFile, MODE_READ_ONLY), 0, -1)
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+                val heroFile = File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), (context as SampleTabActivity).heroKey.replace(" ", ""))
+                context.unzipHero(heroFile.path)
+            }
 
-            if ((context as SoundboardActivity).isHeroKeyMusic()) {
+
+            if ((context as SampleTabActivity).isHeroKeyMusic()) {
                 mPlayer.reset()
             } else {
                 mPlayer = MediaPlayer()
+            }
+
+            // Error check: Sounds may not have unzipped properly
+            if (soundAfd == null) {
+                context.reunzipHero()
+                return@setOnClickListener
             }
 
             mPlayer.setDataSource(soundAfd.fileDescriptor, soundAfd.startOffset, soundAfd.length)

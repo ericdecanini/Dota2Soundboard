@@ -8,9 +8,12 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
+import android.os.ParcelFileDescriptor
 import android.preference.PreferenceManager
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -29,7 +32,7 @@ import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.downloader_ui.*
 
 
-class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, OnLoadLaunchpadCompleted {
+class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     val LOG_TAG = LaunchpadActivity::class.java.simpleName
 
@@ -38,7 +41,6 @@ class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
     lateinit var soundAfds: Array<AssetFileDescriptor?>
     lateinit var mediaPlayers: Array<MediaPlayer?>
 
-    var expansionFiles: ZipResourceFile? = null
     var loadingTextArray: Array<String>? = null
     val handler = Handler()
 
@@ -67,7 +69,6 @@ class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         // Lock Orientation
         requestedOrientation = resources.configuration.orientation
 
-        initExpansion()
         initLaunchpad()
         initSpinner()
         initEdit()
@@ -75,22 +76,10 @@ class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         checkIncomingSound()
     }
 
-    private fun initExpansion() {
-        handler.postDelayed(toggleLoadingText(), 5000)
-        LoadLaunchpadTask(this).execute(this)
-    }
-
     private fun toggleLoadingText(): Runnable = Runnable {
         val choice = Math.floor(Math.random() * loadingTextArray!!.size).toInt()
         tv_progress.text = loadingTextArray!![choice]
         handler.postDelayed(toggleLoadingText(), 5000)
-    }
-
-    override fun onLoadLaunchpadCompleted(expansionFile: ZipResourceFile) {
-        this.expansionFiles = expansionFile
-        pb_launchpad.visibility = View.GONE
-        handler.removeCallbacksAndMessages(null)
-        master_layout.visibility = View.VISIBLE
     }
 
     private fun initEdit() {
@@ -122,6 +111,7 @@ class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         sounds = db.getLaunchpadById(this, launchpadNum)
         launchpadAdapter = LaunchpadAdapter(this, R.layout.grid_item_launchpad, sounds)
         gv_launchpad.adapter = launchpadAdapter
+
         // Set launchpad title
         launchpadTitles[launchpadNum] = db.getLaunchpadTitle(launchpadNum)
         spinner_launchpad.prompt = launchpadTitles[launchpadNum]
@@ -136,6 +126,7 @@ class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         val selectedSoundNumber = intent.getIntExtra(getString(R.string.INTENT_SELECTING_SOUND), -1)
 
         // Assign the sound to the array and save to db
+        sounds = db.getLaunchpadById(this, launchpadNum)
         sounds[selectedSoundNumber]?.let {
             sounds[selectedSoundNumber]?.soundUri = selectedSoundUri
         } ?: run {
@@ -207,13 +198,11 @@ class LaunchpadActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         val soundUri = sound?.soundUri
         val volume: Float = sound!!.volume.toFloat() / 10
 
-        soundAfds[i] ?: run {
-            expansionFiles?:run{ return }
-            soundAfds[i] = expansionFiles!!.getAssetFileDescriptor(soundUri)
-        }
+        val soundFile = File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), soundUri)
+        val soundAfd = AssetFileDescriptor(ParcelFileDescriptor.open(soundFile, ParcelFileDescriptor.MODE_READ_ONLY), 0, -1)
 
         mediaPlayers[i] = MediaPlayer()
-        mediaPlayers[i]!!.setDataSource(soundAfds[i]!!.fileDescriptor, soundAfds[i]!!.startOffset, soundAfds[i]!!.length)
+        mediaPlayers[i]!!.setDataSource(soundAfd.fileDescriptor, soundAfd.startOffset, soundAfd.length)
         mediaPlayers[i]!!.setVolume(volume, volume)
         mediaPlayers[i]!!.prepare()
 

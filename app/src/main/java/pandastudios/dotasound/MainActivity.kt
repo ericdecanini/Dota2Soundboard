@@ -1,7 +1,5 @@
 package pandastudios.dotasound
 
-import android.app.PendingIntent
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
@@ -22,51 +20,20 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
-import com.muddzdev.styleabletoastlibrary.StyleableToast
 import pandastudios.dotasound.arrays.MiscArrays
-import pandastudios.dotasound.arrays.SoundArraysS1
 import pandastudios.dotasound.data.DbHelper
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 import android.content.ActivityNotFoundException
-import android.content.Context
-import android.os.Environment
-import android.os.Handler
-import android.os.Messenger
-import android.view.View
-import com.google.android.vending.expansion.downloader.*
-import kotlinx.android.synthetic.main.downloader_ui.*
-import java.io.File
 
-
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, IDownloaderClient {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     val LOG_TAG = MainActivity::class.java.simpleName
     private lateinit var dbHelper: DbHelper
-    var mDownloaderClientStub: IStub? = null
-    private var mRemoteService: IDownloaderService? = null
 
     var favouritesList: ArrayList<Board>? = null
     lateinit var recentsList: ArrayList<Board>
     var expanded = false
-
-    var loadingText = ""
-    var loadingTextArray: Array<String>? = null
-    val handler = Handler()
-
-    private class XAPKFile internal constructor(val mIsMain: Boolean, val mFileVersion: Int, val mFileSize: Long)
-
-    private val xAPKS = arrayOf<XAPKFile>(XAPKFile(
-            true, // true signifies a main file
-            3, // the version of the APK that the file was uploaded
-            // against
-            687801613L // the length of the file in bytes
-    ), XAPKFile(
-            false, // false signifies a patch file
-            4, // the version of the APK that the patch file was uploaded
-            // against
-            512860L // the length of the patch file in bytes
-    ))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +44,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Set the custom toolbar
         setSupportActionBar(toolbar)
         title = ""
-
-        // Ensure expansion file is available
-        if (!checkExpansionIsDownloaded()) { return }
 
         // Initialise the navigation drawer
         setupNavigationDrawer()
@@ -92,101 +56,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Pick a random soundboard for the discover board
         setupDiscover()
-    }
-
-    private fun checkExpansionIsDownloaded(): Boolean {
-        // Check if expansion files are available before going any further
-        if (!expansionFilesDelivered()) {
-            val pendingIntent =
-            // Build an Intent to start this activity from the Notification
-                    Intent(this, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    }.let { notifierIntent ->
-                        PendingIntent.getActivity(
-                                this,
-                                0,
-                                notifierIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        )
-                    }
-
-
-            // Start the download service (if required)
-            val startResult: Int = DownloaderClientMarshaller.startDownloadServiceIfRequired(
-                    this,
-                    pendingIntent,
-                    SampleDownloaderService::class.java
-            )
-            // If download has started, initialize this activity to show
-            // download progress
-            if (startResult != DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED) {
-                // This is where you do set up to display the download
-                // progress (next step)
-                // Instantiate a member instance of IStub
-                mDownloaderClientStub = DownloaderClientMarshaller.CreateStub(this, SampleDownloaderService::class.java)
-                setContentView(R.layout.downloader_ui)
-                pb_progress.visibility = View.VISIBLE
-                loadingTextArray = resources.getStringArray(R.array.loading_texts)
-                return false
-            } // If the download wasn't necessary, fall through to start the app
-        }
-        return true
-    }
-
-    private fun toggleLoadingText(): Runnable = Runnable {
-        val choice = Math.floor(Math.random() * loadingTextArray!!.size).toInt()
-        tv_progress.text = loadingTextArray!![choice]
-        handler.postDelayed(toggleLoadingText(), 5000)
-    }
-
-    override fun onResume() {
-        mDownloaderClientStub?.connect(this)
-        super.onResume()
-    }
-
-    override fun onStop() {
-        mDownloaderClientStub?.disconnect(this)
-        super.onStop()
-    }
-
-    override fun onServiceConnected(m: Messenger?) {
-        mRemoteService = DownloaderServiceMarshaller.CreateProxy(m).apply {
-            mDownloaderClientStub?.messenger?.also { messenger ->
-                onClientUpdated(messenger)
-            }
-        }
-    }
-
-    override fun onDownloadStateChanged(newState: Int) {
-        when (newState) {
-            IDownloaderClient.STATE_COMPLETED -> restartActivity()
-            IDownloaderClient.STATE_DOWNLOADING -> {
-                tv_progress.text = getString(R.string.invoking_sounds)
-                handler.postDelayed(toggleLoadingText(), 5000)
-            }
-            else -> tv_progress.text = getString(Helpers.getDownloaderStringResourceIDFromState(newState))
-        }
-    }
-
-    override fun onDownloadProgress(progress: DownloadProgressInfo?) {
-        val percent = Helpers.getDownloadProgressPercentLong(progress!!.mOverallProgress, progress.mOverallTotal)
-        pb_progress.setProgress(percent.toFloat())
-    }
-
-    private fun restartActivity() {
-        val intent = intent
-        finish()
-        startActivity(intent)
-    }
-
-    fun expansionFilesDelivered(): Boolean {
-        xAPKS.forEach { xf ->
-            Helpers.getExpansionAPKFileName(this, xf.mIsMain, xf.mFileVersion).also { fileName ->
-                if (!Helpers.doesFileExist(this, fileName, xf.mFileSize, false))
-                    return false
-            }
-        }
-        return true
     }
 
     override fun onStart() {
@@ -289,7 +158,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             val goToMarket = Intent(Intent.ACTION_VIEW, uri)
 
                             goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
-                                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
                                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
                             try {
                                 startActivity(goToMarket)
@@ -366,7 +234,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         discover_title.text = title
         (discover_image as ImageView).setImageResource(imageRes)
         discover_image.setOnClickListener {
-            val intent = Intent(this, SoundboardActivity::class.java)
+            val intent = Intent(this, SampleTabActivity::class.java)
             intent.putExtra(getString(R.string.KEY_HERO), title)
             startActivity(intent)
         }
